@@ -36,3 +36,51 @@
     transform: rotate(360deg);
   }
 }
+
+
+.wbdv-label.wbdv-course-manager {
+  padding-top: 4px;
+  font-weight: bolder;
+  font-size: larger;
+}
+
+.btn.wbdv-button.wbdv-add-course {
+  padding-top: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .owned-collapse {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .lastModified-collapse {
+    display: none;
+  }
+}
+
+.selected {
+  background-color: brown;
+  color: white;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.white {
+  color: white;
+}
+
+tr {
+  line-height: 38px;
+}
+
+.btn.wbdv-button {
+  float: right;
+}
+
+.wbdv-row.wbdv-button.wbdv-delete:hover {
+  color: black;
+}
