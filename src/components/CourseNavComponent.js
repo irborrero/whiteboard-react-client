@@ -1,6 +1,6 @@
 import React from "react";
 
-const CourseNavComponent = ({state, addCourse, updateForm}) =>
+const CourseNavComponent = ({addCourse, updateForm}) =>
     <nav className="navbar navbar-expand-lg">
         <div className="col-3">
             <div className="row">

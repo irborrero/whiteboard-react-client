@@ -1,14 +1,12 @@
 import React from "react";
-import CourseRow from "./CourseRow";
-import CourseTableHeaderComponent from "../CourseTableHeader";
+import CourseRowComponent from "./CourseRowComponent";
 
 const CourseTableComponent = ({courses, deleteCourse, showEditor, activeRow, editingRow, selectRow, editRow}) =>
-
             <tbody>
             {
                 courses.map(function(course, index){
                     return (
-                        <CourseRow
+                        <CourseRowComponent
                             course={course}
                             index={index}
                             showEditor={showEditor}
@@ -22,8 +20,5 @@ const CourseTableComponent = ({courses, deleteCourse, showEditor, activeRow, edi
                 })
             }
             </tbody>
-
-
-
 
 export default CourseTableComponent

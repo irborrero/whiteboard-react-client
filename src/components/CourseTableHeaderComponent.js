@@ -1,11 +1,9 @@
 import React from "react";
 
-
-
 const CourseTableHeaderComponent = ({layout}) =>
     <React.Fragment>
         {
-           layout === 'table' &&
+            layout === 'table' &&
             <tr>
                 <th className="wbdv-header wbdv-title" scope="col">Title
                     <button className="btn">
@@ -26,6 +24,13 @@ const CourseTableHeaderComponent = ({layout}) =>
 
                 </th>
             </tr>
+        }
+        {
+            layout === 'grid' &&
+            <div>
+
+            </div>
+
         }
     </React.Fragment>
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-const CourseRowUnselected  = ({index, course, selectRow, showEditor}) =>
+const CourseRowUnselectedComponent  = ({index, course, selectRow, showEditor}) =>
     <React.Fragment>
         <td onClick={() => selectRow(index)}>
             <a className="black" onClick={showEditor} href="#">
@@ -26,4 +26,4 @@ const CourseRowUnselected  = ({index, course, selectRow, showEditor}) =>
     </React.Fragment>
 
 
-export default CourseRowUnselected
+export default CourseRowUnselectedComponent

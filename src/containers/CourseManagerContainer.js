@@ -4,7 +4,7 @@ import CourseGridComponent from "../components/CourseGridComponent";
 import CourseEditorComponent from "../components/CourseEditor/CourseEditorComponent";
 import {findAllCourses, findCourseById, updateCourse, deleteCourse, createCourse} from "../services/CourseService";
 import CourseNavComponent from "../components/CourseNavComponent";
-import CourseTableHeaderComponent from "../components/CourseTableHeader";
+import CourseTableHeaderComponent from "../components/CourseTableHeaderComponent";
 
 class CourseManagerContainer extends React.Component {
 
@@ -133,7 +133,6 @@ class CourseManagerContainer extends React.Component {
                         !this.state.showEditor &&
                         <div>
                             <CourseNavComponent
-                                state = {this.state}
                                 addCourse = {this.addCourse}
                                 updateForm = {this.updateForm}/>
 
