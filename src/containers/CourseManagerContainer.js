@@ -128,12 +128,13 @@ class CourseManagerContainer extends React.Component {
 
     render() {
         return(
-              <div>
+              <div className="manager-container">
                     {
                         this.state.showEditor &&
                         <CourseEditorComponent
                             hideEditor={this.hideEditor}
-                            course = {this.state.showEditorCourse}/>
+                            course = {this.state.showEditorCourse}
+                        />
                     }
                     {
                         !this.state.showEditor &&
@@ -142,7 +143,7 @@ class CourseManagerContainer extends React.Component {
                                 addCourse = {this.addCourse}
                                 updateForm = {this.updateForm}/>
 
-                            <table className="table">
+                            <table className="table table-hover">
                             <thead>
                             <CourseTableHeaderComponent
                                 layout = {this.state.layout}
@@ -167,7 +168,13 @@ class CourseManagerContainer extends React.Component {
                             {
                                 this.state.layout === 'grid'
                                 && <CourseGridComponent
-                                    courses={this.state.courses}/>
+                                    courses={this.state.courses}
+                                    deleteCourse={this.deleteCourse}
+                                    showEditor={this.showEditor}
+                                    select ={this.selectRow}
+                                    edit={this.editRow}
+                                    editing={this.state.editingRow}
+                                    selected = {this.state.selectedRow}/>
                             }
 
                         </div>

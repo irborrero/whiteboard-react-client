@@ -126,20 +126,21 @@ tr {
 
 }
 
+.card-div {
+  width: fit-content;
+}
+
 .table {
   margin: 0px
 }
 
-.container.card {
+.card {
+  height: fit-content;
   width: fit-content;
-}
-
-span {
-  padding: 15px;
+  margin: 20px;
+  padding: 20px;
   border-radius: 0px;
   border: 1px solid darkgrey;
-  margin: 20px;
-  width: fit-content;
 }
 
 row.course-title-row {
@@ -378,4 +379,9 @@ form{
 .btn.btn-secondary.btn-md.dropdown-toggle {
   background-color: white;
   color: black;
+}
+
+.container.card {
+  padding: 20px;
+  margin: 20px;
 }
