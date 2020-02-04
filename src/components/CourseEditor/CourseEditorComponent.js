@@ -1,7 +1,7 @@
 import React from "react";
 import ModuleListComponent from "./ModuleListComponent";
 import LessonTabs from "./LessonTabs";
-import TopicPills from "./TopicPills";
+import TopicPillsComponent from "./TopicPillsComponent";
 
 const CourseEditorComponent = ({course, hideEditor}) =>
     <div className="container-fluid">
@@ -66,7 +66,7 @@ const CourseEditorComponent = ({course, hideEditor}) =>
                     {_id: "6", title: "Module 6 - Node"},
                     {_id: "7", title: "Module 7 - Mongo"}
                 ]}/>
-
+            <div className="col-8">
             <TopicPillsComponent
                 topics={[
                     {_id: "1", title: "Topic 1"},
@@ -74,28 +74,7 @@ const CourseEditorComponent = ({course, hideEditor}) =>
                     {_id: "3", title: "Topic 3"},
                     {_id: "4", title: "Topic 4"}
                 ]}/>
-            <div className="col-8">
-                <div className="row">
-                    <ul className="nav nav-pills">
-                        <li className="nav-item topic">
-                            <a className="nav-link" href="#">Topic 1</a>
-                        </li>
-                        <li className="nav-item topic">
-                            <a className="nav-link active" href="#">Topic 2</a>
-                        </li>
-                        <li className="nav-item topic">
-                            <a className="nav-link " href="#">Topic 3</a>
-                        </li>
-                        <li className="nav-item topic">
-                            <a className="nav-link" href="#">Topic 4</a>
-                        </li>
-                        <li className="nav-item">
-                            <button className="btn wbdv-new-tab-btn">
-                                <i className="fa fa-plus-circle fa-2x"></i>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+
                 <div className="row">
                     <div className="container">
                         <button className="btn toggle-btn">

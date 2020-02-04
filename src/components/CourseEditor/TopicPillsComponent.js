@@ -1,10 +1,17 @@
 import React from "react";
 
-const TopicPills = () =>
-    <ul>
-        <li>Topic 1</li>
-        <li>Topic 2</li>
-        <li>Topic 3</li>
-    </ul>
+const TopicPillsComponent = ({topics}) =>
+        <div className="row">
+            <ul className="nav nav-pills">
+                {topics.map(topic =>
+                <li className="nav-item topic">
+                    <a className="nav-link" href="#">{topic.title}</a>
+                </li>
+                )}
+            </ul>
+        </div>
 
-export default TopicPills
+export default TopicPillsComponent
+
+
+
