@@ -1,35 +1,36 @@
 import React from "react";
 
-const CourseRowSelected  = ({state, course, showEditor, deleteRow, changeToEdit, changeToNotEdit}) =>
+const CourseRowSelected  = ({index, course, selectRow, showEditor, editingRow, deleteRow, editRow}) =>
+
 <React.Fragment>
-    <td class ="selected">
+    <td class ="selected" onClick={() => selectRow(index)}>
         {
-            !state.editing &&
+            index !== editingRow &&
             <a className="white" onClick={showEditor} href="#">
                 <i className="fas fa-file-alt wbdv-row wbdv-icon white"></i>
-                {course.title}
+                <label className="courseTitle">{course.title}</label>
             </a>
         }
-        {state.editing && <input/>}
+        {index === editingRow && <input id="newinput"/>}
     </td>
     <td className="collapsable wbdv-row wbdv-owner owned-collapse selected">me</td>
     <td className="collapsable wbdv-row wbdv-modified-date lastModified-collapse selected">11:45 AM</td>
     <td className="selected">
         {
-            state.editing &&
-                <button className="btn wbdv-row wbdv-button wbdv-save white" onClick={changeToNotEdit}>
+            index === editingRow &&
+                <button className="btn wbdv-row wbdv-button wbdv-save white" onClick={()=>editRow(index, course)}>
                     <i className="fas fa-check wbdv-button wbdv-save"></i>
                 </button>
 
         }
 
         {
-            !state.editing &&
+            index !== editingRow &&
                 <div>
-                    <button className="btn wbdv-row wbdv-button wbdv-edit white"  onClick={changeToEdit}>
+                    <button className="btn wbdv-row wbdv-button wbdv-edit white"  onClick={()=>editRow(index, course)}>
                         <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
                     </button>
-                    <button className="btn wbdv-row wbdv-button wbdv-delete" onClick={deleteRow}>
+                    <button className="btn wbdv-row wbdv-button wbdv-delete" onClick={()=>deleteRow(course)}>
                         <i className="fas fa-times wbdv-row wbdv-button wbdv-delete white"></i>
                     </button>
                 </div>

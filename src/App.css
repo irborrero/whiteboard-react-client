@@ -40,12 +40,18 @@
 
 .wbdv-label.wbdv-course-manager {
   padding-top: 4px;
+  padding-left: 10px;
   font-weight: bolder;
-  font-size: larger;
+  font-size: 25px;
 }
 
 .btn.wbdv-button.wbdv-add-course {
-  padding-top: 10px;
+  padding-top: 5px;
+  color: brown;
+}
+
+.wbdv-field.wbdv-hamburger {
+  padding-top: 8px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -65,12 +71,28 @@
   color: white;
 }
 
+.courseTitle {
+  padding-left: 5px;
+}
+
 .hidden {
   visibility: hidden;
 }
 
 .white {
   color: white;
+}
+
+.black {
+  color: black;
+}
+
+a:hover {
+  color: cornflowerblue;
+}
+
+#newinput {
+  border-radius: 5px;
 }
 
 tr {

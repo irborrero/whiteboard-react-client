@@ -1,26 +1,29 @@
 import React from "react";
 import CourseRow from "./CourseRow";
-import CourseTableHeaderComponent from "./CourseTableHeader";
+import CourseTableHeaderComponent from "../CourseTableHeader";
 
-const CourseTableComponent = ({courses, deleteCourse, showEditor}) =>
-    <div>
-        <table class="table">
-            <thead>
-                <CourseTableHeaderComponent/>
-            </thead>
-                {
-                    courses.map(function(course, index){
-                        return (
-                            <CourseRow
-                                course={course}
-                                showEditor={showEditor}
-                                deleteCourse={deleteCourse}/>
+const CourseTableComponent = ({courses, deleteCourse, showEditor, activeRow, editingRow, selectRow, editRow}) =>
 
-                        )
-                    })
-                }
-        </table>
-    </div>
+            <tbody>
+            {
+                courses.map(function(course, index){
+                    return (
+                        <CourseRow
+                            course={course}
+                            index={index}
+                            showEditor={showEditor}
+                            deleteCourse={deleteCourse}
+                            activeRow={activeRow}
+                            editingRow={editingRow}
+                            selectRow = {selectRow}
+                            editRow = {editRow}
+                        />
+                    )
+                })
+            }
+            </tbody>
+
+
 
 
 export default CourseTableComponent

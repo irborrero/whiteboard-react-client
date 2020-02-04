@@ -1,11 +1,11 @@
 import React from "react";
 
-const CourseRowUnselected  = ({course, showEditor}) =>
+const CourseRowUnselected  = ({index, course, selectRow, showEditor}) =>
     <React.Fragment>
-        <td>
-            <a onClick={showEditor} href="#">
+        <td onClick={() => selectRow(index)}>
+            <a className="black" onClick={showEditor} href="#">
                 <i className="fas fa-file-alt wbdv-row wbdv-icon"></i>
-                {course.title}
+                <label className="courseTitle">{course.title}</label>
             </a>
         </td>
         <td className="collapsable wbdv-row wbdv-owner owned-collapse">me</td>

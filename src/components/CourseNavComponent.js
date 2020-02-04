@@ -24,7 +24,7 @@ const CourseNavComponent = ({state, addCourse, updateForm}) =>
         </div>
         <div className="col-2">
             <button onClick={addCourse} className="btn wbdv-button wbdv-add-course">
-                <i className="fa fa-plus-circle fa-2x">
+                <i className="fa fa-plus-circle fa-3x">
                 </i>
             </button>
         </div>

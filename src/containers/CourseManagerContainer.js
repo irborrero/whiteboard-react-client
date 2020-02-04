@@ -4,6 +4,7 @@ import CourseGridComponent from "../components/CourseGridComponent";
 import CourseEditorComponent from "../components/CourseEditor/CourseEditorComponent";
 import {findAllCourses, findCourseById, updateCourse, deleteCourse, createCourse} from "../services/CourseService";
 import CourseNavComponent from "../components/CourseNavComponent";
+import CourseTableHeaderComponent from "../components/CourseTableHeader";
 
 class CourseManagerContainer extends React.Component {
 
@@ -11,8 +12,38 @@ class CourseManagerContainer extends React.Component {
         layout: 'table',
         showEditor: false,
         newCourseTitle: "",
-        courses: []
+        courses: [],
+        selectedRow: -1,
+        editingRow: -1,
     }
+
+    selectRow = (index) =>
+        this.setState(prevState => {
+            if(this.state.selectedRow === index && this.state.editingRow === -1) {
+                this.setState({
+                    selectedRow: -1,
+                    editingRow: -1
+                })
+            } else {
+                this.setState({
+                    selectedRow: index
+                })
+            }
+        })
+
+    editRow = (index, course) =>
+        this.setState(prevState => {
+            if(this.state.editingRow === index) {
+                this.updateCourseRow(index, course)
+                this.setState({
+                    editingRow: -1
+                })
+            } else {
+                this.setState({
+                    editingRow: index
+                })
+            }
+        })
 
     componentDidMount = () =>
         findAllCourses()
@@ -34,7 +65,7 @@ class CourseManagerContainer extends React.Component {
             }
         })
 
-    deleteCourse = (course) =>
+    deleteCourse = (course) => {
         deleteCourse(course._id)
             .then(status => {
                 this.setState(prevState => {
@@ -48,21 +79,33 @@ class CourseManagerContainer extends React.Component {
                 })
             })
 
+        this.setState({
+            selectedRow: -1
+        })
+    }
+
+
     addCourse = () => {
-        createCourse({
-            title: this.state.newCourseTitle
-        }).then(actualCourse => this.setState(prevState => {
-                return({
-                    courses: [
-                        ...prevState.courses,
-                        actualCourse
-                    ]
+            createCourse({
+                title: this.state.newCourseTitle
+            }).then(actualCourse => this.setState(prevState => {
+                    return({
+                        courses: [
+                            ...prevState.courses,
+                            actualCourse
+                        ]
+                    })
                 })
-            })
-        )
+            )
         document.getElementById("wbdv-new-course").value = ""
     }
 
+   updateCourseRow = (index, course) => {
+        if(document.getElementById("newinput").value) {
+            course.title = document.getElementById("newinput").value
+            updateCourse(course._id, course)
+        }
+    }
 
     showEditor = () =>
         this.setState({
@@ -95,19 +138,29 @@ class CourseManagerContainer extends React.Component {
                                 updateForm = {this.updateForm}/>
 
                             <button onClick={this.toggle}>Toggle</button>
-
+                            <table className="table">
+                            <thead>
+                            <CourseTableHeaderComponent
+                                layout = {this.state.layout}
+                            />
+                            </thead>
                             {
                                 this.state.layout === 'table' &&
                                 <CourseTableComponent
-                                    showEditor={this.showEditor}
+                                    courses={this.state.courses}
                                     deleteCourse={this.deleteCourse}
-                                    courses={this.state.courses}/>
+                                    showEditor={this.showEditor}
+                                    activeRow={this.state.selectedRow}
+                                    editingRow={this.state.editingRow}
+                                    selectRow ={this.selectRow}
+                                    editRow={this.editRow}/>
                             }
                             {
                                 this.state.layout === 'grid'
                                 && <CourseGridComponent
                                     courses={this.state.courses}/>
                             }
+                            </table>
                         </div>
                     }
                 </div>
