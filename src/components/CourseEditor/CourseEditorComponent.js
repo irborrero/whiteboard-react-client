@@ -1,6 +1,6 @@
 import React from "react";
 import ModuleListComponent from "./ModuleListComponent";
-import LessonTabs from "./LessonTabs";
+import LessonTabsComponent from "./LessonTabsComponent";
 import TopicPillsComponent from "./TopicPillsComponent";
 
 const CourseEditorComponent = ({course, hideEditor}) =>
@@ -16,36 +16,16 @@ const CourseEditorComponent = ({course, hideEditor}) =>
                             {course.title}
                         </label>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link tab" href="#">
-                            Build
-                        </a>
-                    </li>
-                    <li className="nav-item wbdv-page-tab">
-                        <a className="nav-link active tab" href="#">
-                            Pages
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link tab" href="#">
-                            Theme
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link tab" href="#">
-                            Store
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link tab" href="#">
-                            Apps
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link tab" href="#">
-                            Settings
-                        </a>
-                    </li>
+                    <LessonTabsComponent
+                        tabs={[
+                            {_id: "1", title: "Build"},
+                            {_id: "2", title: "Pages"},
+                            {_id: "3", title: "Theme"},
+                            {_id: "4", title: "Store"},
+                            {_id: "5", title: "Apps"},
+                            {_id: "6", title: "Settings"}
+                        ]}
+                    />
                     <li className="nav-item">
                         <button className="btn wbdv-new-page-btn">
                             <i className="fa fa-plus-circle fa-2x"></i>
