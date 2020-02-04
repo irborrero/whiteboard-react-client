@@ -95,9 +95,6 @@ a:hover {
   border-radius: 5px;
 }
 
-tr {
-  line-height: 38px;
-}
 
 .btn.wbdv-button {
   float: right;
@@ -108,26 +105,15 @@ tr {
 }
 
 
-.grid {
-  background-color: lightgrey;
-}
 
 .grid.owned-label {
   padding-right: 10px;
 }
 
 .container.grid {
-  background-color: lightgrey;
-  max-width: 100%;
-  margin-right: 0px;
-  margin-left: 0px;
   padding-top: 30px;
   padding-bottom: 30px;
 
-}
-
-.card-div {
-  width: fit-content;
 }
 
 .table {
@@ -135,17 +121,14 @@ tr {
 }
 
 .card {
-  height: fit-content;
-  width: fit-content;
-  margin: 20px;
-  padding: 20px;
+  padding: 10px;
   border-radius: 0px;
   border: 1px solid darkgrey;
 }
 
 row.course-title-row {
-  justify-content: center;
 }
+
 .course-title-grid {
   margin-bottom: 0px;
 }
@@ -315,10 +298,6 @@ row.course-title-row {
   margin-left: 20px;
 }
 
-.container {
-  margin-left: 50px;
-  margin-right: 50px;
-}
 
 form{
   margin-top: 10px;
@@ -384,4 +363,12 @@ form{
 .container.card {
   padding: 20px;
   margin: 20px;
+}
+
+.card-div {
+  padding: 5px;
+}
+
+.row {
+  align-content: center;
 }

@@ -6,30 +6,39 @@ const CourseCardComponent = ({course, index, deleteCourse, showEditor, select, e
         <React.Fragment>
             {
                 index !== selected &&
-                    <div className="container">
+                    <div>
                         <div className="card-div"  onClick={() => select(index)}>
-                            <i className="fas fa-file-word fa-6x"></i>
+                            <i className="fas fa-file-word fa-3x"></i>
                         </div>
                         <div className = "card-div">
                             <a className="black" onClick={()=>showEditor(course)} href="#">
-                                <label className="course-title-grid courseTitle">
+                                <label className="course-title-grid">
                                     {course.title}
                                 </label>
                             </a>
+                        </div>
+                        <div>
+                            <button className="btn wbdv-row wbdv-button wbdv-edit white hidden"  onClick={()=>edit(index, course)} >
+                                <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
+                            </button>
+
+                            <button className="btn wbdv-row wbdv-button wbdv-delete white hidden"  onClick={()=>deleteCourse(course)}>
+                                <i className="fas fa-times wbdv-row wbdv-button wbdv-delete"></i>
+                            </button>
                         </div>
                     </div>
             }
             {
                 index === selected &&
-                <div className="container selected">
+                <div className="selected">
                         <div className="card-div"  onClick={() => select(index)}>
-                            <i className="fas fa-file-word fa-6x"></i>
+                            <i className="fas fa-file-word fa-3x"></i>
                         </div>
                         <div className = "card-div">
                             {
                                 index !== editing &&
                                 <a className="white" onClick={()=>showEditor(course)} href="#">
-                                    <label className="course-title-grid courseTitle">
+                                    <label className="course-title-grid">
                                         {course.title}
                                     </label>
                                 </a>
