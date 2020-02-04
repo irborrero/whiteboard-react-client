@@ -1,6 +1,6 @@
 import React from "react";
 import CourseTableComponent from "../components/CourseTable/CourseTableComponent";
-import CourseGridComponent from "../components/CourseGridComponent";
+import CourseGridComponent from "../components/CourseGrid/CourseGridComponent";
 import CourseEditorComponent from "../components/CourseEditor/CourseEditorComponent";
 import {findAllCourses, findCourseById, updateCourse, deleteCourse, createCourse} from "../services/CourseService";
 import CourseNavComponent from "../components/CourseNavComponent";
@@ -11,10 +11,11 @@ class CourseManagerContainer extends React.Component {
     state = {
         layout: 'table',
         showEditor: false,
-        newCourseTitle: "",
+        newCourseTitle: "New Course Title",
         courses: [],
         selectedRow: -1,
         editingRow: -1,
+        showEditorCourse: {}
     }
 
     selectRow = (index) =>
@@ -65,6 +66,7 @@ class CourseManagerContainer extends React.Component {
             }
         })
 
+
     deleteCourse = (course) => {
         deleteCourse(course._id)
             .then(status => {
@@ -86,17 +88,19 @@ class CourseManagerContainer extends React.Component {
 
 
     addCourse = () => {
-            createCourse({
-                title: this.state.newCourseTitle
-            }).then(actualCourse => this.setState(prevState => {
-                    return({
-                        courses: [
-                            ...prevState.courses,
-                            actualCourse
-                        ]
+            if(document.getElementById("wbdv-new-course").value !== "") {
+                createCourse({
+                    title: this.state.newCourseTitle
+                }).then(actualCourse => this.setState(prevState => {
+                        return ({
+                            courses: [
+                                ...prevState.courses,
+                                actualCourse
+                            ]
+                        })
                     })
-                })
-            )
+                )
+            }
         document.getElementById("wbdv-new-course").value = ""
     }
 
@@ -107,9 +111,10 @@ class CourseManagerContainer extends React.Component {
         }
     }
 
-    showEditor = () =>
+    showEditor = (showEditorCourse) =>
         this.setState({
-            showEditor: true
+            showEditor: true,
+            showEditorCourse: showEditorCourse
         })
 
     hideEditor = () =>
@@ -118,7 +123,7 @@ class CourseManagerContainer extends React.Component {
         })
 
     updateForm = (newState) => {
-        this.setState(newState)
+            this.setState(newState)
     }
 
     render() {
@@ -127,7 +132,8 @@ class CourseManagerContainer extends React.Component {
                     {
                         this.state.showEditor &&
                         <CourseEditorComponent
-                            hideEditor={this.hideEditor}/>
+                            hideEditor={this.hideEditor}
+                            course = {this.state.showEditorCourse}/>
                     }
                     {
                         !this.state.showEditor &&
@@ -136,13 +142,15 @@ class CourseManagerContainer extends React.Component {
                                 addCourse = {this.addCourse}
                                 updateForm = {this.updateForm}/>
 
-                            <button onClick={this.toggle}>Toggle</button>
                             <table className="table">
                             <thead>
                             <CourseTableHeaderComponent
                                 layout = {this.state.layout}
+                                toggle = {this.toggle}
                             />
+
                             </thead>
+
                             {
                                 this.state.layout === 'table' &&
                                 <CourseTableComponent
@@ -153,13 +161,15 @@ class CourseManagerContainer extends React.Component {
                                     editingRow={this.state.editingRow}
                                     selectRow ={this.selectRow}
                                     editRow={this.editRow}/>
+
                             }
+                            </table>
                             {
                                 this.state.layout === 'grid'
                                 && <CourseGridComponent
                                     courses={this.state.courses}/>
                             }
-                            </table>
+
                         </div>
                     }
                 </div>

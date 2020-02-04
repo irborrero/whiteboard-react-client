@@ -6,7 +6,7 @@ const CourseRowSelectedComponent  = ({index, course, selectRow, showEditor, edit
         <td class ="selected" onClick={() => selectRow(index)}>
             {
                 index !== editingRow &&
-                <a className="white" onClick={showEditor} href="#">
+                <a className="white" onClick={()=>showEditor(course)} href="#">
                     <i className="fas fa-file-alt wbdv-row wbdv-icon white"></i>
                     <label className="courseTitle">{course.title}</label>
                 </a>

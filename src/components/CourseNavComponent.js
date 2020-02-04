@@ -15,7 +15,7 @@ const CourseNavComponent = ({addCourse, updateForm}) =>
         </div>
         <div className="col-7">
             <input
-                className="form-control wbdv-field "
+                className="form-control wbdv-field"
                 onChange = {(e) => updateForm({
                     newCourseTitle: e.target.value
                     })}

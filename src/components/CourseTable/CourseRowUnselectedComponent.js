@@ -3,7 +3,7 @@ import React from "react";
 const CourseRowUnselectedComponent  = ({index, course, selectRow, showEditor}) =>
     <React.Fragment>
         <td onClick={() => selectRow(index)}>
-            <a className="black" onClick={showEditor} href="#">
+            <a className="black" onClick={()=>showEditor(course)} href="#">
                 <i className="fas fa-file-alt wbdv-row wbdv-icon"></i>
                 <label className="courseTitle">{course.title}</label>
             </a>

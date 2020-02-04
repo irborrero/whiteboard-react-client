@@ -1,10 +1,10 @@
 import React from "react";
 
-const CourseTableHeaderComponent = ({layout}) =>
+const CourseTableHeaderComponent = ({layout, toggle}) =>
     <React.Fragment>
         {
             layout === 'table' &&
-            <tr>
+            <tr className = "table">
                 <th className="wbdv-header wbdv-title" scope="col">Title
                     <button className="btn">
                         <i className="fas fa-sort-up"></i>
@@ -15,7 +15,7 @@ const CourseTableHeaderComponent = ({layout}) =>
                 </th>
                 <th className="wbdv-header wbdv-last-modified lastModified-collapse" scope="col">Last Modified by me</th>
                 <th scope="col">
-                    <button className="btn wbdv-button wbdv-grid-layout">
+                    <button className="btn wbdv-button wbdv-grid-layout" onClick={toggle} >
                         <i className="fas fa-grip-horizontal"></i>
                     </button>
                     <button className="btn wbdv-button wbdv-header wbdv-sort">
@@ -27,9 +27,27 @@ const CourseTableHeaderComponent = ({layout}) =>
         }
         {
             layout === 'grid' &&
-            <div>
+            <tr className = "grid">
+                <th className="wbdv-header wbdv-recent" scope="col">Recent Documents
+                </th>
+                <th className="wbdv-header wbdv-owner" scope="col">
+                    <label className = "grid owned-label">Owned by me</label>
+                    <i className="fas fa-sort-down"></i>
+                </th>
+                <th scope="col">
+                    <button className="btn wbdv-button wbdv-header wbdv-folder">
+                        <i className="fas fa-folder"></i>
+                    </button>
+                    <button className="btn wbdv-button wbdv-header wbdv-sort">
+                        <i className="fas fa-sort-alpha-up"></i>
+                    </button>
+                    <button className="btn wbdv-button wbdv-list-layout" onClick={toggle} >
+                        <i className="fas fa-list"></i>
+                    </button>
 
-            </div>
+                </th>
+
+            </tr>
 
         }
     </React.Fragment>
