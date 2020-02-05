@@ -27,11 +27,12 @@ const CourseRowSelectedComponent  = ({index, course, selectRow, showEditor, edit
             {
                 index !== editingRow &&
                 <div>
-                    <button className="btn wbdv-row wbdv-button wbdv-edit white"  onClick={()=>editRow(index, course)}>
+                    <button className="btn wbdv-row wbdv-button wbdv-edit white"
+                            onClick={()=> editRow(index, course)}>
                         <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
                     </button>
                     <button className="btn wbdv-row wbdv-button wbdv-delete white" onClick={()=>deleteRow(course)}>
-                        <i className="fas fa-times wbdv-row wbdv-button wbdv-delete"></i>
+                        <i className="fas fa-trash-alt wbdv-row wbdv-button wbdv-delete"></i>
                     </button>
                 </div>
 

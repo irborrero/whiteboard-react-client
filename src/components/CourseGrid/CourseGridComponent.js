@@ -3,11 +3,10 @@ import CourseCardComponent from "./CourseCardComponent";
 
 const CourseGridComponent = ({courses, deleteCourse, showEditor, select, edit, selected, editing}) =>
     <div className="container grid">
-        <div className="row">
+        <div className="row card-row">
             {
                 courses.map(function(course, index){
                     return (
-                        <div className="card col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
                             <CourseCardComponent
                                 course={course}
                                 index={index}
@@ -18,7 +17,6 @@ const CourseGridComponent = ({courses, deleteCourse, showEditor, select, edit, s
                                 editing={editing}
                                 selected={selected}
                             />
-                        </div>
                     )
                 })
             }

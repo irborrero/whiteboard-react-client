@@ -113,17 +113,38 @@ a:hover {
 .container.grid {
   padding-top: 30px;
   padding-bottom: 30px;
-
 }
 
 .table {
   margin: 0px
 }
 
+.row.card-row {
+  text-align: center;
+  margin: 20px;
+}
+
 .card {
-  padding: 10px;
+  width: 80%;
   border-radius: 0px;
-  border: 1px solid darkgrey;
+  border: 10px solid white;
+  padding: 5px;
+  background-color: lightgrey;
+}
+
+.selected-grid {
+  color: #BD2519;
+}
+
+.card-img-top {
+  margin-top: 5px;
+  text-align: center;
+}
+
+.card-body{
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 0px;
 }
 
 row.course-title-row {
@@ -374,5 +395,5 @@ form{
 }
 
 .smaller {
-  width: 150px;
+  width: 100px;
 }
