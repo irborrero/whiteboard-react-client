@@ -45,7 +45,7 @@ const CourseCardComponent = ({course, index, deleteCourse, showEditor, select, e
                             }
                             {
                                 index === editing &&
-                                <input id="newinput"/>
+                                <input class = "smaller" id="newinput" placeholder={course.title}/>
                             }
                         </div>
                         <div>

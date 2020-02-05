@@ -11,7 +11,7 @@ const CourseRowSelectedComponent  = ({index, course, selectRow, showEditor, edit
                     <label className="courseTitle">{course.title}</label>
                 </a>
             }
-            {index === editingRow && <input id="newinput"/>}
+            {index === editingRow && <input id="newinput" placeholder={course.title}/>}
         </td>
         <td className="collapsable wbdv-row wbdv-owner owned-collapse selected">me</td>
         <td className="collapsable wbdv-row wbdv-modified-date lastModified-collapse selected">11:45 AM</td>

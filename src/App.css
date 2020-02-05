@@ -372,3 +372,7 @@ form{
 .row {
   align-content: center;
 }
+
+.smaller {
+  width: 150px;
+}
