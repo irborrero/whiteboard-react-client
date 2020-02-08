@@ -1,6 +1,7 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
-const CourseCardComponent = ({course, index, deleteCourse, showEditor, select, edit, editing, selected}) =>
+const CourseCardComponent = ({course, index, deleteCourse, select, edit, editing, selected}) =>
 {
     return (
         <React.Fragment>
@@ -11,11 +12,11 @@ const CourseCardComponent = ({course, index, deleteCourse, showEditor, select, e
                             <i className="fas fa-file-word fa-6x"></i>
                         </div>
                         <div className="card-body">
-                                <a className="black" onClick={()=>showEditor(course)} href="#">
+                                <Link className="black" to={`/course/${course._id}`}>
                                     <label className="course-title-grid">
                                         {course.title}
                                     </label>
-                                </a>
+                                </Link>
                             </div>
                             <div>
                                 <button className="btn wbdv-row wbdv-button wbdv-edit white hidden"  onClick={()=>edit(index, course)} >
@@ -38,7 +39,7 @@ const CourseCardComponent = ({course, index, deleteCourse, showEditor, select, e
                         <div className="card-body">
                                 {
                                     index !== editing &&
-                                    <a className="black" onClick={() => showEditor(course)} href="#">
+                                    <a className="black"  to={`/course/${course._id}`}>
                                         <label className="course-title-grid">
                                             {course.title}
                                         </label>

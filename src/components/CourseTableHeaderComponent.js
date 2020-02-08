@@ -1,9 +1,11 @@
 import React from "react";
+import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 
-const CourseTableHeaderComponent = ({layout, toggle}) =>
+const CourseTableHeaderComponent = () =>
     <React.Fragment>
-        {
-            layout === 'table' &&
+        <Route path="/table"
+               exact={true}
+               render={() =>
             <tr className = "table">
                 <th className="wbdv-header wbdv-title" scope="col">Title
                     <button className="btn">
@@ -15,8 +17,10 @@ const CourseTableHeaderComponent = ({layout, toggle}) =>
                 </th>
                 <th className="wbdv-header wbdv-last-modified lastModified-collapse" scope="col">Last Modified by me</th>
                 <th scope="col">
-                    <button className="btn wbdv-button wbdv-grid-layout" onClick={toggle} >
-                        <i className="fas fa-grip-horizontal"></i>
+                    <button className="btn wbdv-button wbdv-grid-layout" >
+                        <Link  className="black" to={`/grid`}>
+                            <i className="fas fa-grip-horizontal"></i>
+                        </Link>
                     </button>
                     <button className="btn wbdv-button wbdv-header wbdv-sort">
                         <i className="fas fa-sort-alpha-up"></i>
@@ -24,9 +28,10 @@ const CourseTableHeaderComponent = ({layout, toggle}) =>
 
                 </th>
             </tr>
-        }
-        {
-            layout === 'grid' &&
+        }/>
+        <Route path="/grid"
+               exact={true}
+               render={() =>
             <tr className = "grid">
                 <th className="wbdv-header wbdv-recent" scope="col">Recent Documents
                 </th>
@@ -41,15 +46,16 @@ const CourseTableHeaderComponent = ({layout, toggle}) =>
                     <button className="btn wbdv-button wbdv-header wbdv-sort">
                         <i className="fas fa-sort-alpha-up"></i>
                     </button>
-                    <button className="btn wbdv-button wbdv-list-layout" onClick={toggle} >
-                        <i className="fas fa-list"></i>
+                    <button className="btn wbdv-button wbdv-list-layout" >
+                        <Link className="black" to={`/table`}>
+                            <i className="fas fa-list"></i>
+                        </Link>
                     </button>
 
                 </th>
 
             </tr>
-
-        }
+        }/>
     </React.Fragment>
 
 

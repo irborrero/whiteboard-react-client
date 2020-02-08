@@ -4,17 +4,20 @@ import LessonTabsComponent from "./LessonTabsComponent";
 import TopicPillsComponent from "./TopicPillsComponent";
 import WidgetListComponent from "./WidgetListComponent";
 
-const CourseEditorComponent = ({course, hideEditor}) =>
+const CourseEditorComponent = ({history, courseId, findCourseById}) =>
     <div className="container-fluid">
         <div className="row especial-row">
             <div className="col-12">
                 <ul className="nav nav-tabs nav-justified">
                     <li className="navbar-brand col-4 allspace">
-                        <button className="btn wbdv-course-editor wbdv-close" onClick={hideEditor}>
+                        <button className="btn wbdv-course-editor wbdv-close" onClick={() => history.push("/")}>
                             <i className="fas fa-times fa-lg"></i>
                         </button>
                         <label className="wbdv-course-title">
-                            {course.title}
+                            {()=>findCourseById(courseId).then(actualCourse => {
+                                    return actualCourse.title
+                                }
+                            )}
                         </label>
                     </li>
                     <LessonTabsComponent

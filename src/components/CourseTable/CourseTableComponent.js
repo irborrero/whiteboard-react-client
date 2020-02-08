@@ -1,7 +1,7 @@
 import React from "react";
 import CourseRowComponent from "./CourseRowComponent";
 
-const CourseTableComponent = ({courses, deleteCourse, showEditor, activeRow, editingRow, selectRow, editRow}) =>
+const CourseTableComponent = ({courses, deleteCourse, activeRow, editingRow, selectRow, editRow}) =>
             <tbody>
             {
                 courses.map(function(course, index){
@@ -9,7 +9,6 @@ const CourseTableComponent = ({courses, deleteCourse, showEditor, activeRow, edi
                         <CourseRowComponent
                             course={course}
                             index={index}
-                            showEditor={showEditor}
                             deleteCourse={deleteCourse}
                             activeRow={activeRow}
                             editingRow={editingRow}

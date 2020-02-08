@@ -1,7 +1,7 @@
 import React from "react";
 import CourseCardComponent from "./CourseCardComponent";
 
-const CourseGridComponent = ({courses, deleteCourse, showEditor, select, edit, selected, editing}) =>
+const CourseGridComponent = ({courses, deleteCourse, select, edit, selected, editing}) =>
     <div className="container grid">
         <div className="row card-row">
             {
@@ -11,7 +11,6 @@ const CourseGridComponent = ({courses, deleteCourse, showEditor, select, edit, s
                                 course={course}
                                 index={index}
                                 deleteCourse={deleteCourse}
-                                showEditor={showEditor}
                                 select={select}
                                 edit={edit}
                                 editing={editing}

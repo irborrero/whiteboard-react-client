@@ -5,12 +5,11 @@ import CourseEditorComponent from "../components/CourseEditor/CourseEditorCompon
 import {findAllCourses, findCourseById, updateCourse, deleteCourse, createCourse} from "../services/CourseService";
 import CourseNavComponent from "../components/CourseNavComponent";
 import CourseTableHeaderComponent from "../components/CourseTableHeaderComponent";
+import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 
 class CourseManagerContainer extends React.Component {
 
     state = {
-        layout: 'table',
-        showEditor: false,
         newCourseTitle: "New Course Title",
         courses: [],
         selectedRow: -1,
@@ -52,19 +51,6 @@ class CourseManagerContainer extends React.Component {
                     courses: courses
                 })
             )
-
-    toggle = () =>
-        this.setState(prevState => {
-            if(prevState.layout === 'table') {
-                return ({
-                    layout: 'grid'
-                })
-            } else {
-                return ({
-                    layout: 'table'
-                })
-            }
-        })
 
 
     deleteCourse = (course) => {
@@ -111,16 +97,9 @@ class CourseManagerContainer extends React.Component {
         }
     }
 
-    showEditor = (showEditorCourse) =>
-        this.setState({
-            showEditor: true,
-            showEditorCourse: showEditorCourse
-        })
+    findCourseById = (courseId) =>
+         findCourseById(courseId)
 
-    hideEditor = () =>
-        this.setState({
-            showEditor: false
-        })
 
     updateForm = (newState) => {
             this.setState(newState)
@@ -128,58 +107,52 @@ class CourseManagerContainer extends React.Component {
 
     render() {
         return(
+            <Router>
               <div className="manager-container">
-                    {
-                        this.state.showEditor &&
-                        <CourseEditorComponent
-                            hideEditor={this.hideEditor}
-                            course = {this.state.showEditorCourse}
-                        />
-                    }
-                    {
-                        !this.state.showEditor &&
-                        <div>
+                  <Route path="/course/:courseId"
+                         exact={true}
+                         render={(props) =>
+                             <CourseEditorComponent
+                                 {...props}
+                                 courseId={props.match.params.courseId}
+                                 findCourseById = {this.findCourseById}
+                                 />
+                         }/>
+
                             <CourseNavComponent
                                 addCourse = {this.addCourse}
                                 updateForm = {this.updateForm}/>
 
                             <table className="table table-hover">
-                            <thead>
-                            <CourseTableHeaderComponent
-                                layout = {this.state.layout}
-                                toggle = {this.toggle}
-                            />
+                                <thead>
+                                    <CourseTableHeaderComponent/>
+                                </thead>
 
-                            </thead>
-
-                            {
-                                this.state.layout === 'table' &&
-                                <CourseTableComponent
-                                    courses={this.state.courses}
-                                    deleteCourse={this.deleteCourse}
-                                    showEditor={this.showEditor}
-                                    activeRow={this.state.selectedRow}
-                                    editingRow={this.state.editingRow}
-                                    selectRow ={this.selectRow}
-                                    editRow={this.editRow}/>
-
-                            }
+                                <Route path="/table"
+                                       render={() =>
+                                       <CourseTableComponent
+                                           courses={this.state.courses}
+                                           deleteCourse={this.deleteCourse}
+                                           activeRow={this.state.selectedRow}
+                                           editingRow={this.state.editingRow}
+                                           selectRow={this.selectRow}
+                                           editRow={this.editRow}/>
+                                        }/>
                             </table>
-                            {
-                                this.state.layout === 'grid'
-                                && <CourseGridComponent
-                                    courses={this.state.courses}
-                                    deleteCourse={this.deleteCourse}
-                                    showEditor={this.showEditor}
-                                    select ={this.selectRow}
-                                    edit={this.editRow}
-                                    editing={this.state.editingRow}
-                                    selected = {this.state.selectedRow}/>
-                            }
 
-                        </div>
-                    }
+                                <Route path="/grid"
+                                       exact={true}
+                                       render={() =>
+                                           <CourseGridComponent
+                                               courses={this.state.courses}
+                                               deleteCourse={this.deleteCourse}
+                                               select ={this.selectRow}
+                                               edit={this.editRow}
+                                               editing={this.state.editingRow}
+                                               selected = {this.state.selectedRow}/>
+                                       }/>
                 </div>
+            </Router>
         )
     }
 }

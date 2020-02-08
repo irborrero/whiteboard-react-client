@@ -1,12 +1,13 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
-const CourseRowUnselectedComponent  = ({index, course, selectRow, showEditor}) =>
+const CourseRowUnselectedComponent  = ({index, course, selectRow}) =>
     <React.Fragment>
         <td onClick={() => selectRow(index)}>
-            <a className="black" onClick={()=>showEditor(course)} href="#">
+            <Link className="black"to={`/course/${course._id}`}>
                 <i className="fas fa-file-alt wbdv-row wbdv-icon"></i>
                 <label className="courseTitle">{course.title}</label>
-            </a>
+            </Link>
         </td>
         <td className="collapsable wbdv-row wbdv-owner owned-collapse">me</td>
         <td className="collapsable wbdv-row wbdv-modified-date lastModified-collapse">11:45 AM</td>

@@ -1,15 +1,16 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
-const CourseRowSelectedComponent  = ({index, course, selectRow, showEditor, editingRow, deleteRow, editRow}) =>
+const CourseRowSelectedComponent  = ({index, course, selectRow, editingRow, deleteRow, editRow}) =>
 
     <React.Fragment>
         <td class ="selected" onClick={() => selectRow(index)}>
             {
                 index !== editingRow &&
-                <a className="white" onClick={()=>showEditor(course)} href="#">
+                <Link className="white"  to={`/course/${course._id}`}>
                     <i className="fas fa-file-alt wbdv-row wbdv-icon white"></i>
                     <label className="courseTitle">{course.title}</label>
-                </a>
+                </Link>
             }
             {index === editingRow && <input id="newinput" placeholder={course.title}/>}
         </td>
