@@ -1,6 +1,6 @@
 import {API_URL} from "../constants";
 
-
+//TODO: ADD MODULE
 export const createModule = (courseId) =>
     fetch(`${API_URL}/courses/${courseId}/modules`, {
         method: "POST",
