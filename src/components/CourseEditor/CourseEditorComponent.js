@@ -3,8 +3,22 @@ import ModuleListComponent from "./ModuleListComponent";
 import LessonTabsComponent from "./LessonTabsComponent";
 import TopicPillsComponent from "./TopicPillsComponent";
 import WidgetListComponent from "./WidgetListComponent";
+import {Link} from "react-router-dom";
+import {combineReducers, createStore} from "redux";
+import {Provider} from "react-redux";
+import moduleReducer from "../../reducers/moduleReducer";
+import lessonReducer from "../../reducers/lessonReducer";
 
-const CourseEditorComponent = ({history, courseId, findCourseById}) =>
+
+const rootReducer = combineReducers({
+    modules: moduleReducer,
+    lessons: lessonReducer
+})
+
+const store = createStore(rootReducer)
+
+const CourseEditorComponent = ({history, courseId, moduleId, lessonId, findCourseById}) =>
+    <Provider store={store}>
     <div className="container-fluid">
         <div className="row especial-row">
             <div className="col-12">
@@ -14,10 +28,7 @@ const CourseEditorComponent = ({history, courseId, findCourseById}) =>
                             <i className="fas fa-times fa-lg"></i>
                         </button>
                         <label className="wbdv-course-title">
-                            {()=>findCourseById(courseId).then(actualCourse => {
-                                    return actualCourse.title
-                                }
-                            )}
+                            {courseId}
                         </label>
                     </li>
                     <LessonTabsComponent
@@ -29,6 +40,11 @@ const CourseEditorComponent = ({history, courseId, findCourseById}) =>
                             {_id: "5", title: "Apps"},
                             {_id: "6", title: "Settings"}
                         ]}
+                        /*
+                        moduleId={moduleId}
+                        courseId={courseId}
+                        */
+
                     />
                     <li className="nav-item">
                         <button className="btn wbdv-new-page-btn">
@@ -41,15 +57,8 @@ const CourseEditorComponent = ({history, courseId, findCourseById}) =>
         <div className="row custom-row">
 
             <ModuleListComponent
-                modules={[
-                    {_id: "1", title: "Module 1 - JQuery"},
-                    {_id: "2", title: "Module 2 - React"},
-                    {_id: "3", title: "Module 3 - Redux"},
-                    {_id: "4", title: "Module 4 - Native"},
-                    {_id: "5", title: "Module 5 - Angular"},
-                    {_id: "6", title: "Module 6 - Node"},
-                    {_id: "7", title: "Module 7 - Mongo"}
-                ]}/>
+                courseId={courseId}/>
+
             <div className="col-8">
             <TopicPillsComponent
                 topics={[
@@ -57,7 +66,11 @@ const CourseEditorComponent = ({history, courseId, findCourseById}) =>
                     {_id: "2", title: "Topic 2"},
                     {_id: "3", title: "Topic 3"},
                     {_id: "4", title: "Topic 4"}
-                ]}/>
+                ]}
+                /* lessonId={lessonId}
+                        moduleId={moduleId}
+                        courseId={courseId} */
+                />
 
                 <div className="row">
                     <div className="container">
@@ -78,5 +91,6 @@ const CourseEditorComponent = ({history, courseId, findCourseById}) =>
             <i className="fa fa-plus-circle fa"></i>
         </button>
     </div>
+    </Provider>
 
 export default CourseEditorComponent

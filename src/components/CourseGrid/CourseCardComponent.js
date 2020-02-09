@@ -39,11 +39,11 @@ const CourseCardComponent = ({course, index, deleteCourse, select, edit, editing
                         <div className="card-body">
                                 {
                                     index !== editing &&
-                                    <a className="black"  to={`/course/${course._id}`}>
+                                    <Link className="black"  to={`/course/${course._id}`}>
                                         <label className="course-title-grid">
                                             {course.title}
                                         </label>
-                                    </a>
+                                    </Link>
                                 }
                                 {
                                     index === editing &&

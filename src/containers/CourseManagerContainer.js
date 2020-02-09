@@ -97,8 +97,6 @@ class CourseManagerContainer extends React.Component {
         }
     }
 
-    findCourseById = (courseId) =>
-         findCourseById(courseId)
 
 
     updateForm = (newState) => {
@@ -115,7 +113,6 @@ class CourseManagerContainer extends React.Component {
                              <CourseEditorComponent
                                  {...props}
                                  courseId={props.match.params.courseId}
-                                 findCourseById = {this.findCourseById}
                                  />
                          }/>
 
@@ -128,15 +125,16 @@ class CourseManagerContainer extends React.Component {
                                     <CourseTableHeaderComponent/>
                                 </thead>
 
-                                <Route path="/table"
+                                <Route path={["/", "/table"]}
+                                       exact={true}
                                        render={() =>
-                                       <CourseTableComponent
-                                           courses={this.state.courses}
-                                           deleteCourse={this.deleteCourse}
-                                           activeRow={this.state.selectedRow}
-                                           editingRow={this.state.editingRow}
-                                           selectRow={this.selectRow}
-                                           editRow={this.editRow}/>
+                                               <CourseTableComponent
+                                                   courses={this.state.courses}
+                                                   deleteCourse={this.deleteCourse}
+                                                   activeRow={this.state.selectedRow}
+                                                   editingRow={this.state.editingRow}
+                                                   selectRow={this.selectRow}
+                                                   editRow={this.editRow}/>
                                         }/>
                             </table>
 

@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 
 const CourseTableHeaderComponent = () =>
     <React.Fragment>
-        <Route path="/table"
+        <Route path={["/", "/table"]}
                exact={true}
                render={() =>
             <tr className = "table">
