@@ -44,7 +44,6 @@ const CourseEditorComponent = ({history, courseId, moduleId, lessonId, findCours
                         moduleId={moduleId}
                         courseId={courseId}
                         */
-
                     />
                     <li className="nav-item">
                         <button className="btn wbdv-new-page-btn">

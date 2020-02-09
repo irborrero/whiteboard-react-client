@@ -44,5 +44,6 @@ export const updateModule = async (moduleId, module) => {
 export default {
     deleteModule,
     findModuleForCourse,
-    createModule
+    createModule,
+    updateModule
 }
