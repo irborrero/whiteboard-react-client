@@ -1,8 +1,9 @@
 import {API_URL} from "../constants";
 
 //TODO: ADD LESSON
-export const createLesson = (moduleId) =>
-    fetch(`${API_URL}/modules/${moduleId}/lessons`, {
+export const createLesson = (moduleId) => {
+    console.log(moduleId)
+    return fetch(`${API_URL}/modules/${moduleId}/lessons`, {
         method: "POST",
         body: JSON.stringify({title: "New Lesson"}),
         headers: {
@@ -10,8 +11,10 @@ export const createLesson = (moduleId) =>
         }
     })
         .then(response => response.json())
+}
 
-export const findLessonsForModule = (moduleId) =>
+
+export const findLessonForModule = (moduleId) =>
     fetch(`${API_URL}/modules/${moduleId}/lessons`)
         .then(response => response.json())
 
@@ -43,6 +46,6 @@ export const updateLesson = async (lessonId, lesson) => {
 
 export default {
     deleteLesson,
-    findLessonsForModule,
+    findLessonForModule,
     createLesson
 }

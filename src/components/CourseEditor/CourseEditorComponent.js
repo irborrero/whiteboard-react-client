@@ -32,24 +32,9 @@ const CourseEditorComponent = ({history, courseId, moduleId, lessonId, findCours
                         </label>
                     </li>
                     <LessonTabsComponent
-                        tabs={[
-                            {_id: "1", title: "Build"},
-                            {_id: "2", title: "Pages"},
-                            {_id: "3", title: "Theme"},
-                            {_id: "4", title: "Store"},
-                            {_id: "5", title: "Apps"},
-                            {_id: "6", title: "Settings"}
-                        ]}
-                        /*
                         moduleId={moduleId}
                         courseId={courseId}
-                        */
                     />
-                    <li className="nav-item">
-                        <button className="btn wbdv-new-page-btn">
-                            <i className="fa fa-plus-circle fa-2x"></i>
-                        </button>
-                    </li>
                 </ul>
             </div>
         </div>

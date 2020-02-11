@@ -23,6 +23,7 @@ const moduleReducer = (state = initialState, action) => {
 
         case CREATE_MODULE:
             return {
+                selectedModule: state.selectedModule,
                 modules: [
                     ...state.modules,
                     action.newModule
