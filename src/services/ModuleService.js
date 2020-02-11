@@ -25,7 +25,7 @@ export const deleteModule = (moduleId) =>
 
 export const findModule = async (moduleId) => {
     const response = await fetch(`${API_URL}/modules/${moduleId}`)
-    return await  response.json()
+    return await response.json()
 }
 
 

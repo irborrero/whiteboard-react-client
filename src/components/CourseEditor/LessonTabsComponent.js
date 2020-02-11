@@ -1,13 +1,15 @@
 import React from "react";
 import {connect} from "react-redux"
-import {findLessonForModule, selectLesson, deleteLesson, updateLesson, createLesson} from "../../actions/lessonActions";
+import {findLessonForModule, selectLesson, deleteLesson, updateLesson, createLesson, findCourseById} from "../../actions/lessonActions";
 import lessonService from '../../services/LessonService'
+import courseService from '../../services/CourseService'
 import {Link} from "react-router-dom";
 
 
 class LessonTabsComponent extends React.Component {
     componentDidMount() {
             this.props.findLessonForModule(this.props.moduleId)
+            this.props.findCourseById(this.props.courseId)
 
     }
 
@@ -20,6 +22,11 @@ class LessonTabsComponent extends React.Component {
     render() {
         return (
                <React.Fragment>
+                   <li className="navbar-brand col-4 allspace">
+                       <label className="wbdv-course-title">
+                           {this.props.course.title}
+                       </label>
+                   </li>
                    {this.props.lessons && this.props.lessons.map(lesson =>
                        <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${lesson._id}`}>
                        <li className="nav-item">
@@ -68,6 +75,7 @@ class LessonTabsComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
+        course: state.lessons.course,
         lessons: state.lessons.lessons,
         selectedLesson: state.lessons.selectedLesson,
     }
@@ -76,6 +84,12 @@ const stateToPropertyMapper = (state) => {
 
 const dispatchToPropertyMapper = (dispatch)  => {
     return {
+        findCourseById: (courseId) =>
+            courseService.findCourseById(courseId)
+                .then(course => {
+                    dispatch(findCourseById(course))
+                }),
+
         findLessonForModule: (moduleId) =>
             lessonService.findLessonForModule(moduleId)
                 .then(actualLessons => {
