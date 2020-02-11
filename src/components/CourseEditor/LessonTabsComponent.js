@@ -2,8 +2,7 @@ import React from "react";
 import {connect} from "react-redux"
 import {findLessonForModule, selectLesson, deleteLesson, updateLesson, createLesson} from "../../actions/lessonActions";
 import lessonService from '../../services/LessonService'
-import {Route} from "react-router-dom";
-
+import {Link} from "react-router-dom";
 
 
 class LessonTabsComponent extends React.Component {
@@ -22,6 +21,7 @@ class LessonTabsComponent extends React.Component {
         return (
                <React.Fragment>
                    {this.props.lessons && this.props.lessons.map(lesson =>
+                       <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${lesson._id}`}>
                        <li className="nav-item">
                            {
                                this.props.selectedLesson !== lesson._id &&
@@ -42,7 +42,9 @@ class LessonTabsComponent extends React.Component {
                                    <input id="lessonTitle" placeholder={lesson.title}/>
                                    <button className="btn wbdv-module-item-delete-btn"
                                            onClick={() => this.props.deleteLesson(lesson._id)}>
-                                       <i className="fas fa-times"></i>
+                                       <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}`}>
+                                            <i className="fas fa-times"></i>
+                                       </Link>
                                    </button>
                                    <button className="btn wbdv-row wbdv-button wbdv-save white"
                                            onClick={() => this.props.updateLesson(lesson._id, lesson)}>
@@ -51,6 +53,7 @@ class LessonTabsComponent extends React.Component {
                                </div>
                            }
                        </li>
+                       </Link>
                    )}
                    <li className="nav-item">
                        <button className="btn wbdv-new-page-btn"
@@ -76,7 +79,6 @@ const dispatchToPropertyMapper = (dispatch)  => {
         findLessonForModule: (moduleId) =>
             lessonService.findLessonForModule(moduleId)
                 .then(actualLessons => {
-                    console.log("fetch" + actualLessons)
                         dispatch(findLessonForModule(actualLessons, moduleId))}),
 
         selectLesson: (lessonId) =>

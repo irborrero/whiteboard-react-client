@@ -5,7 +5,7 @@ export const createLesson = (moduleId) => {
     console.log(moduleId)
     return fetch(`${API_URL}/modules/${moduleId}/lessons`, {
         method: "POST",
-        body: JSON.stringify({title: "New Lesson"}),
+        body: JSON.stringify({title: "Lesson"}),
         headers: {
             'content-type': 'application/json'
         }

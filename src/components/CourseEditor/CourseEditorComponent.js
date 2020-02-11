@@ -3,16 +3,17 @@ import ModuleListComponent from "./ModuleListComponent";
 import LessonTabsComponent from "./LessonTabsComponent";
 import TopicPillsComponent from "./TopicPillsComponent";
 import WidgetListComponent from "./WidgetListComponent";
-import {Link} from "react-router-dom";
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import moduleReducer from "../../reducers/moduleReducer";
 import lessonReducer from "../../reducers/lessonReducer";
+import topicReducer from "../../reducers/topicReducer";
 
 
 const rootReducer = combineReducers({
     modules: moduleReducer,
-    lessons: lessonReducer
+    lessons: lessonReducer,
+    topics: topicReducer
 })
 
 const store = createStore(rootReducer)
@@ -45,15 +46,9 @@ const CourseEditorComponent = ({history, courseId, moduleId, lessonId, findCours
 
             <div className="col-8">
             <TopicPillsComponent
-                topics={[
-                    {_id: "1", title: "Topic 1"},
-                    {_id: "2", title: "Topic 2"},
-                    {_id: "3", title: "Topic 3"},
-                    {_id: "4", title: "Topic 4"}
-                ]}
-                /* lessonId={lessonId}
-                        moduleId={moduleId}
-                        courseId={courseId} */
+                lessonId={lessonId}
+                moduleId={moduleId}
+                courseId={courseId}
                 />
 
                 <div className="row">

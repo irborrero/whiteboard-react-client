@@ -4,7 +4,7 @@ import {API_URL} from "../constants";
 export const createModule = (courseId) =>
     fetch(`${API_URL}/courses/${courseId}/modules`, {
         method: "POST",
-        body: JSON.stringify({title: "New Module"}),
+        body: JSON.stringify({title: "Module"}),
         headers: {
             'content-type': 'application/json'
         }

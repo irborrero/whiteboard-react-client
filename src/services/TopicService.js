@@ -1,17 +1,18 @@
 import {API_URL} from "../constants";
+import {createLesson, deleteLesson, findLessonForModule, updateLesson} from "./LessonService";
 
 //TODO: ADD TOPIC
 export const createTopic = (lessonId) =>
     fetch(`${API_URL}/lessons/${lessonId}/topics`, {
         method: "POST",
-        body: JSON.stringify({title: "New Lesson"}),
+        body: JSON.stringify({title: "Topic"}),
         headers: {
             'content-type': 'application/json'
         }
     })
         .then(response => response.json())
 
-export const findTopicsForLesson = (lessonId) =>
+export const findTopicForLesson = (lessonId) =>
     fetch(`${API_URL}/lessons/${lessonId}/topics`)
         .then(response => response.json())
 
@@ -42,4 +43,8 @@ export const updateTopic = async (topicId, topic) => {
 
 
 export default {
+    deleteTopic,
+    findTopicForLesson,
+    createTopic,
+    updateTopic
 }

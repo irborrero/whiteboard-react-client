@@ -14,30 +14,33 @@ class ModuleListComponent extends React.Component {
             <div className="col-4 custom-col">
                 <ul className="list-group wbdv-module-list">
                     {this.props.modules && this.props.modules.map(module =>
-                        <Link className = "white-module" to={`/course/${this.props.courseId}/module/${module._id}`} onClick={() => this.props.selectModule(module._id)}>
-                        <li key={module._id} className="list-group-item wbdv-module-item">
+                        <Link className = "white-module" to={`/course/${this.props.courseId}/module/${module._id}`}>
+                            <li key={module._id} className="list-group-item wbdv-module-item">
                                 {
                                     this.props.selectedModule !== module._id &&
-                                    <React.Fragment>
-                                        <label className="wbdv-module-item-title">{module.title}</label>
-                                        <button className="btn wbdv-row wbdv-button wbdv-edit white">
-                                            <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
-                                        </button>
-                                    </React.Fragment>
+
+                                        <React.Fragment>
+                                            <label className="wbdv-module-item-title">{module.title}</label>
+                                            <button className="btn wbdv-row wbdv-button wbdv-edit white" onClick={() => this.props.selectModule(module._id)}>
+                                                <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
+                                            </button>
+                                        </React.Fragment>
                                 }
                                 {
                                     this.props.selectedModule === module._id &&
-                                    <React.Fragment>
-                                        <input id="moduleTitle" placeholder={module.title}/>
-                                        <button className="btn wbdv-module-item-delete-btn" onClick={() => this.props.deleteModule(module._id)}>
-                                            <i className="fas fa-times"></i>
-                                        </button>
-                                        <button className="btn wbdv-row wbdv-button wbdv-save white" onClick={() => this.props.updateModule(module._id, module)}>
-                                            <i className="fas fa-check wbdv-button wbdv-save"></i>
-                                        </button>
-                                    </React.Fragment>
+                                        <React.Fragment>
+                                            <input id="moduleTitle" placeholder={module.title}/>
+                                            <button className="btn wbdv-module-item-delete-btn" onClick={() => this.props.deleteModule(module._id)}>
+                                                <Link className = "white-module" to={`/course/${this.props.courseId}`}>
+                                                    <i className="fas fa-times"></i>
+                                                </Link>
+                                            </button>
+                                            <button className="btn wbdv-row wbdv-button wbdv-save white" onClick={() => this.props.updateModule(module._id, module)}>
+                                                <i className="fas fa-check wbdv-button wbdv-save"></i>
+                                            </button>
+                                        </React.Fragment>
                                 }
-                        </li>
+                            </li>
                         </Link>
                     )}
                 </ul>
