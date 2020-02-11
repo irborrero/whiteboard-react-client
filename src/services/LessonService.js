@@ -47,5 +47,6 @@ export const updateLesson = async (lessonId, lesson) => {
 export default {
     deleteLesson,
     findLessonForModule,
-    createLesson
+    createLesson,
+    updateLesson
 }

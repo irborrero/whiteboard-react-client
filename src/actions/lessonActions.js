@@ -15,10 +15,9 @@ export const deleteLesson = (lessonId) => ({
     lessonId: lessonId
 })
 
-export const findLessonForModule = (actualLessons,moduleId) => ({
+export const findLessonForModule = (actualLessons) => ({
     type: FIND_LESSON_FOR_MODULE,
     lessons: actualLessons,
-    module: moduleId
 })
 
 export const selectLesson = (lessonId) => ({

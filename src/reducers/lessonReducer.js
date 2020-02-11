@@ -1,7 +1,6 @@
 import {CREATE_LESSON, FIND_LESSON_FOR_MODULE, FIND_LESSON, UPDATE_LESSON, DELETE_LESSON, SELECT_LESSON} from "../actions/lessonActions";
 
 const initialState = {
-    selectedModule:"",
     selectedLesson: "",
     lessons: [
         {title: "Lesson 0000", _id: "000"},
@@ -16,14 +15,12 @@ const lessonReducer = (state = initialState, action) => {
     switch(action.type) {
         case FIND_LESSON_FOR_MODULE:
             return {
-                selectedModule: action.module,
                 selectedLesson: "",
                 lessons: action.lessons
             }
 
         case CREATE_LESSON:
             return {
-                selectedModule: state.selectedModule,
                 selectedLesson: state.selectedLesson,
                 lessons: [
                     ...state.lessons,
@@ -33,14 +30,12 @@ const lessonReducer = (state = initialState, action) => {
 
         case DELETE_LESSON:
             return {
-                selectedModule: state.selectedModule,
                 selectedLesson: "",
                 lessons: state.lessons.filter(lesson => lesson._id !== action.lessonId)
             }
 
         case SELECT_LESSON:
             return {
-                selectedModule: state.selectedModule,
                 lessons: state.lessons,
                 selectedLesson: action.selectedLesson
             }
@@ -53,7 +48,6 @@ const lessonReducer = (state = initialState, action) => {
 
         case UPDATE_LESSON:
             return {
-                selectedModule: state.selectedModule,
                 selectedLesson: "",
                 lessons: state.lessons
             }

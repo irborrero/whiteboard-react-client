@@ -12,6 +12,12 @@ class LessonTabsComponent extends React.Component {
 
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.moduleId != this.props.moduleId) {
+            this.props.findLessonForModule(this.props.moduleId)
+        }
+    }
+
     render() {
         return (
                <React.Fragment>
@@ -21,7 +27,7 @@ class LessonTabsComponent extends React.Component {
                                this.props.selectedLesson !== lesson._id &&
                                <div className="row">
                                    <a className="nav-link tab" href="#">
-                                       {this.props.moduleId}
+                                       {lesson.title}
                                    </a>
                                    <button className="btn wbdv-row wbdv-button wbdv-edit white"
                                            onClick={() => this.props.selectLesson(lesson._id)}>
@@ -58,12 +64,9 @@ class LessonTabsComponent extends React.Component {
 }
 
 const stateToPropertyMapper = (state) => {
-    console.log(state.lessons.lessons, state.lessons.selectedModule, state.modules.selectedModule)
     return {
         lessons: state.lessons.lessons,
         selectedLesson: state.lessons.selectedLesson,
-        lessonsForModule: state.lessons.selectedModule,
-        selectedModule: state.modules.selectedModule
     }
 
 }
@@ -87,7 +90,7 @@ const dispatchToPropertyMapper = (dispatch)  => {
         updateLesson: (lessonId, lesson) => {
             if(document.getElementById("lessonTitle").value) {
                 lesson.title = document.getElementById("lessonTitle").value
-                lessonService.updateModule(lessonId, lesson)
+                lessonService.updateLesson(lessonId, lesson)
                     .then(newLesson =>
                         dispatch(updateLesson(newLesson)))
             }
