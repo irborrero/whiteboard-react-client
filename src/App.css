@@ -423,3 +423,7 @@ form{
 .blue {
   background-color: #4F86ED;
 }
+
+.topic.red {
+  background-color: #007CFF;
+}

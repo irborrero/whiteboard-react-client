@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
-import {findLessonForModule, selectLesson, deleteLesson, updateLesson, createLesson, findCourseById} from "../../actions/lessonActions";
+import {findLessonForModule, selectLesson, deleteLesson, editLesson, updateLesson, createLesson, findCourseById, updateLessonForModule} from "../../actions/lessonActions";
 import lessonService from '../../services/LessonService'
 import courseService from '../../services/CourseService'
 import {Link} from "react-router-dom";
@@ -15,7 +15,7 @@ class LessonTabsComponent extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.moduleId != this.props.moduleId) {
-            this.props.findLessonForModule(this.props.moduleId)
+            this.props.updateLessonForModule(this.props.moduleId)
         }
     }
 
@@ -37,28 +37,45 @@ class LessonTabsComponent extends React.Component {
                                            <label onClick={() => this.props.selectLesson(lesson._id)}>
                                                {lesson.title}
                                            </label>
-                                           <button className="btn wbdv-row wbdv-button wbdv-edit white "  onClick={() => this.props.selectLesson(lesson._id)}>
+                                       </Link>
+                                           <button className="btn wbdv-row wbdv-button wbdv-edit white "  onClick={() => this.props.editLesson(lesson._id)}>
                                                <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit "></i>
                                            </button>
-                                       </Link>
                                    </div>
                                </li>
                            }
                            {
                                this.props.selectedLesson === lesson._id &&
-                               <li className="nav-item blue nav-link tab">
-                                   <input id="lessonTitle" className="input"  placeholder={lesson.title}/>
-                                   <button className="btn wbdv-module-item-delete-btn"
-                                           onClick={() => this.props.deleteLesson(lesson._id)}>
-                                       <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}`}>
-                                           <i className="fas fa-times"></i>
-                                       </Link>
-                                   </button>
-                                   <button className="btn wbdv-row wbdv-button wbdv-save white"
-                                           onClick={() => this.props.updateLesson(lesson._id, lesson)}>
-                                       <i className="fas fa-check wbdv-button wbdv-save"></i>
-                                   </button>
-                               </li>
+                                   <React.Fragment>
+                                       {
+                                           this.props.editingLesson === lesson._id &&
+                                           <li className="nav-item blue nav-link tab">
+                                               <input id="lessonTitle" className="input"  placeholder={lesson.title}/>
+                                               <button className="btn wbdv-module-item-delete-btn"
+                                                       onClick={() => this.props.deleteLesson(lesson._id)}>
+                                                   <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}`}>
+                                                       <i className="fas fa-times"></i>
+                                                   </Link>
+                                               </button>
+                                               <button className="btn wbdv-row wbdv-button wbdv-save white"
+                                                       onClick={() => this.props.updateLesson(lesson._id, lesson)}>
+                                                   <i className="fas fa-check wbdv-button wbdv-save"></i>
+                                               </button>
+                                           </li>
+                                       }
+                                       {
+                                           this.props.editingLesson !== lesson._id &&
+                                           <li className="nav-item blue nav-link tab">
+                                               <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${lesson._id}`}>
+                                                   <label>{lesson.title}
+                                                   </label>
+                                                   <button className="btn wbdv-row wbdv-button wbdv-edit white "  onClick={() => this.props.editLesson(lesson._id)}>
+                                                       <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit "></i>
+                                                   </button>
+                                               </Link>
+                                           </li>
+                                       }
+                                   </React.Fragment>
                            }
                        </React.Fragment>
 
@@ -79,6 +96,7 @@ const stateToPropertyMapper = (state) => {
         course: state.lessons.course,
         lessons: state.lessons.lessons,
         selectedLesson: state.lessons.selectedLesson,
+        editingLesson: state.lessons.editingLesson
     }
 
 }
@@ -95,9 +113,17 @@ const dispatchToPropertyMapper = (dispatch)  => {
             lessonService.findLessonForModule(moduleId)
                 .then(actualLessons => {
                         dispatch(findLessonForModule(actualLessons, moduleId))}),
+        updateLessonForModule: (moduleId) =>
+            lessonService.findLessonForModule(moduleId)
+                .then(actualLessons => {
+                    dispatch(updateLessonForModule(actualLessons))
+                }),
 
         selectLesson: (lessonId) =>
             dispatch(selectLesson(lessonId)),
+
+        editLesson: (lessonId) =>
+            dispatch(editLesson((lessonId))),
 
         deleteLesson: (lessonId) =>
             lessonService.deleteLesson(lessonId)

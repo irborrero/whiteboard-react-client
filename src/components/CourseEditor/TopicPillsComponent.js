@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
-import {findTopicForLesson, selectTopic, deleteTopic, updateTopic, createTopic} from "../../actions/topicActions";
+import {findTopicForLesson, selectTopic, deleteTopic, updateTopic, createTopic, editTopic} from "../../actions/topicActions";
 import topicService from '../../services/TopicService'
 
 
@@ -27,22 +27,36 @@ class TopicPillsComponent extends React.Component {
                         this.props.selectedTopic !== topic._id &&
                             <li className="nav-item topic">
                                 <label className="nav-link"  onClick={() => this.props.selectTopic(topic._id)}>{topic.title}</label>
-                                <button className="btn wbdv-row wbdv-button wbdv-edit white" onClick={() => this.props.selectTopic(topic._id)}>
+                                <button className="btn wbdv-row wbdv-button wbdv-edit white" onClick={() => this.props.editTopic(topic._id)}>
                                     <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
                                 </button>
                             </li>
                     }
                     {
                         this.props.selectedTopic === topic._id &&
-                        <li className="nav-item topic">
-                            <input id="topicTitle" className="input"  placeholder={topic.title}/>
-                            <button className="btn wbdv-module-item-delete-btn" onClick={() => this.props.deleteTopic(topic._id)}>
-                                <i className="fas fa-times"></i>
-                            </button>
-                            <button className="btn wbdv-row wbdv-button wbdv-save white" onClick={() => this.props.updateTopic(topic._id, topic)}>
-                                <i className="fas fa-check wbdv-button wbdv-save"></i>
-                            </button>
-                        </li>
+                            <React.Fragment>
+                                {
+                                    this.props.editingTopic !== topic._id &&
+                                    <li className="nav-item topic red">
+                                        <label className="nav-link">{topic.title}</label>
+                                        <button className="btn wbdv-row wbdv-button wbdv-edit white" onClick={() => this.props.editTopic(topic._id)}>
+                                            <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
+                                        </button>
+                                    </li>
+                                }
+                                {
+                                    this.props.editingTopic === topic._id &&
+                                    <li className="nav-item topic red">
+                                        <input id="topicTitle" className="input"  placeholder={topic.title}/>
+                                        <button className="btn wbdv-module-item-delete-btn" onClick={() => this.props.deleteTopic(topic._id)}>
+                                            <i className="fas fa-times"></i>
+                                        </button>
+                                        <button className="btn wbdv-row wbdv-button wbdv-save white" onClick={() => this.props.updateTopic(topic._id, topic)}>
+                                            <i className="fas fa-check wbdv-button wbdv-save"></i>
+                                        </button>
+                                    </li>
+                                }
+                            </React.Fragment>
                     }
                     </React.Fragment>
                 )}
@@ -61,6 +75,7 @@ const stateToPropertyMapper = (state) => {
     return {
         topics: state.topics.topics,
         selectedTopic: state.topics.selectedTopic,
+        editingTopic: state.topics.editingTopic
     }
 }
 
@@ -73,6 +88,9 @@ const dispatchToPropertyMapper = (dispatch)  => {
 
         selectTopic: (topicId) =>
             dispatch(selectTopic(topicId)),
+
+        editTopic: (topicId) =>
+            dispatch(editTopic(topicId)),
 
         deleteTopic: (topicId) =>
             topicService.deleteTopic(topicId)
