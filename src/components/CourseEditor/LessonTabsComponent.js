@@ -28,44 +28,45 @@ class LessonTabsComponent extends React.Component {
                        </label>
                    </li>
                    {this.props.lessons && this.props.lessons.map(lesson =>
-                       <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${lesson._id}`}>
-                       <li className="nav-item">
+                       <React.Fragment>
                            {
                                this.props.selectedLesson !== lesson._id &&
-                               <div className="row">
-                                   <a className="nav-link tab" href="#">
-                                       {lesson.title}
-                                   </a>
-                                   <button className="btn wbdv-row wbdv-button wbdv-edit white"
-                                           onClick={() => this.props.selectLesson(lesson._id)}>
-                                       <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit white"></i>
-                                   </button>
-                               </div>
-
+                               <li className="nav-item ">
+                                   <div className="nav-link tab">
+                                       <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${lesson._id}`}>
+                                           <label onClick={() => this.props.selectLesson(lesson._id)}>
+                                               {lesson.title}
+                                           </label>
+                                           <button className="btn wbdv-row wbdv-button wbdv-edit white "  onClick={() => this.props.selectLesson(lesson._id)}>
+                                               <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit "></i>
+                                           </button>
+                                       </Link>
+                                   </div>
+                               </li>
                            }
                            {
                                this.props.selectedLesson === lesson._id &&
-                               <div className="row">
-                                   <input id="lessonTitle" placeholder={lesson.title}/>
+                               <li className="nav-item blue nav-link tab">
+                                   <input id="lessonTitle" className="input"  placeholder={lesson.title}/>
                                    <button className="btn wbdv-module-item-delete-btn"
                                            onClick={() => this.props.deleteLesson(lesson._id)}>
                                        <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}`}>
-                                            <i className="fas fa-times"></i>
+                                           <i className="fas fa-times"></i>
                                        </Link>
                                    </button>
                                    <button className="btn wbdv-row wbdv-button wbdv-save white"
                                            onClick={() => this.props.updateLesson(lesson._id, lesson)}>
                                        <i className="fas fa-check wbdv-button wbdv-save"></i>
                                    </button>
-                               </div>
+                               </li>
                            }
-                       </li>
-                       </Link>
+                       </React.Fragment>
+
                    )}
                    <li className="nav-item">
-                       <button className="btn wbdv-new-page-btn"
+                       <button className="btn wbdv-new-page-btn "
                                onClick={() => this.props.createLesson(this.props.moduleId)}>
-                           <i className="fa fa-plus-circle fa-2x"></i>
+                           <i className="fa fa-plus-circle fa-3x"></i>
                        </button>
                    </li>
                </React.Fragment>
@@ -106,10 +107,11 @@ const dispatchToPropertyMapper = (dispatch)  => {
         updateLesson: (lessonId, lesson) => {
             if(document.getElementById("lessonTitle").value) {
                 lesson.title = document.getElementById("lessonTitle").value
+            }
                 lessonService.updateLesson(lessonId, lesson)
                     .then(newLesson =>
                         dispatch(updateLesson(newLesson)))
-            }
+
         },
 
         createLesson: (moduleId) => {

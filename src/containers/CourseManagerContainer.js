@@ -10,6 +10,7 @@ import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 class CourseManagerContainer extends React.Component {
 
     state = {
+        layout: 'table',
         newCourseTitle: "New Course Title",
         courses: [],
         selectedRow: -1,
@@ -52,6 +53,19 @@ class CourseManagerContainer extends React.Component {
                 })
             )
 
+
+    toggle = () =>
+        this.setState(prevState => {
+            if(prevState.layout === 'table') {
+                return ({
+                    layout: 'grid'
+                })
+            } else {
+                return ({
+                    layout: 'table'
+                })
+            }
+        })
 
     deleteCourse = (course) => {
         deleteCourse(course._id)
@@ -113,6 +127,7 @@ class CourseManagerContainer extends React.Component {
                              <CourseEditorComponent
                                  {...props}
                                  courseId={props.match.params.courseId}
+                                 layout = {this.state.layout}
                                  />
                          }/>
 
@@ -122,7 +137,8 @@ class CourseManagerContainer extends React.Component {
                              <CourseEditorComponent
                                  {...props}
                                  moduleId={props.match.params.moduleId}
-                                 courseId={props.match.params.courseId}/>
+                                 courseId={props.match.params.courseId}
+                                 layout = {this.state.layout}/>
                          }/>
 
                   <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
@@ -131,7 +147,8 @@ class CourseManagerContainer extends React.Component {
                                  {...props}
                                  lessonId={props.match.params.lessonId}
                                  moduleId={props.match.params.moduleId}
-                                 courseId={props.match.params.courseId}/>
+                                 courseId={props.match.params.courseId}
+                                 layout = {this.state.layout}/>
                          }/>
 
                             <CourseNavComponent
@@ -140,7 +157,9 @@ class CourseManagerContainer extends React.Component {
 
                             <table className="table table-hover">
                                 <thead>
-                                    <CourseTableHeaderComponent/>
+                                    <CourseTableHeaderComponent
+                                        toggle = {this.toggle}
+                                    />
                                 </thead>
 
                                 <Route path={["/", "/table"]}

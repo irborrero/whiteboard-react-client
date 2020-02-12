@@ -17,7 +17,7 @@ const moduleReducer = (state = initialState, action) => {
 
         case FIND_MODULE_FOR_COURSE:
             return {
-                selectedModule: "",
+                selectedModule: state.selectedModule,
                 modules: action.modules
             }
 

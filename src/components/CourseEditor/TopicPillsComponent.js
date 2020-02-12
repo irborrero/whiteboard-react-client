@@ -22,29 +22,29 @@ class TopicPillsComponent extends React.Component {
             <div className="row">
                 <ul className="nav nav-pills">
                 {this.props.topics && this.props.topics.map(topic =>
-                    <li className="nav-item topic">
+                    <React.Fragment>
                     {
                         this.props.selectedTopic !== topic._id &&
-                            <div className="row">
-                                <a className="nav-link" href="#">{topic.title}</a>
+                            <li className="nav-item topic">
+                                <label className="nav-link"  onClick={() => this.props.selectTopic(topic._id)}>{topic.title}</label>
                                 <button className="btn wbdv-row wbdv-button wbdv-edit white" onClick={() => this.props.selectTopic(topic._id)}>
-                                    <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit white"></i>
+                                    <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
                                 </button>
-                            </div>
+                            </li>
                     }
                     {
                         this.props.selectedTopic === topic._id &&
-                        <div className="row">
-                            <input id="topicTitle" placeholder={topic.title}/>
+                        <li className="nav-item topic">
+                            <input id="topicTitle" className="input"  placeholder={topic.title}/>
                             <button className="btn wbdv-module-item-delete-btn" onClick={() => this.props.deleteTopic(topic._id)}>
                                 <i className="fas fa-times"></i>
                             </button>
                             <button className="btn wbdv-row wbdv-button wbdv-save white" onClick={() => this.props.updateTopic(topic._id, topic)}>
                                 <i className="fas fa-check wbdv-button wbdv-save"></i>
                             </button>
-                        </div>
+                        </li>
                     }
-                    </li>
+                    </React.Fragment>
                 )}
                     <li className="nav-item topic">
                         <button className="btn wbdv-new-page-btn" onClick={() => this.props.createTopic(this.props.lessonId)}>
@@ -82,10 +82,10 @@ const dispatchToPropertyMapper = (dispatch)  => {
         updateTopic: (topicId, topic) => {
             if(document.getElementById("topicTitle").value) {
                 topic.title = document.getElementById("topicTitle").value
+            }
                 topicService.updateTopic(topicId, topic)
                     .then(newTopic=>
                         dispatch(updateTopic(newTopic)))
-            }
         },
 
         createTopic: (lessonId) => {

@@ -18,15 +18,24 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer)
 
-const CourseEditorComponent = ({history, courseId, moduleId, lessonId, findCourseById}) =>
+const CourseEditorComponent = ({history, courseId, moduleId, lessonId, layout}) =>
     <Provider store={store}>
     <div className="container-fluid">
         <div className="row especial-row">
             <div className="col-12">
                 <ul className="nav nav-tabs nav-justified">
-                    <button className="btn wbdv-course-editor wbdv-close" onClick={() => history.push("/")}>
-                        <i className="fas fa-times fa-lg"></i>
-                    </button>
+                    {
+                        layout === 'table' &&
+                        <button className="btn wbdv-course-editor wbdv-close" onClick={() => history.push("/")}>
+                            <i className="fas fa-times fa-lg white fa-2x"></i>
+                        </button>
+                    }
+                    {
+                        layout === 'grid' &&
+                        <button className="btn wbdv-course-editor wbdv-close" onClick={() => history.push("/grid")}>
+                            <i className="fas fa-times fa-lg white fa-2x"></i>
+                        </button>
+                    }
                     <LessonTabsComponent
                         moduleId={moduleId}
                         courseId={courseId}

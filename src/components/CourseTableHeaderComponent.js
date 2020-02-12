@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 
-const CourseTableHeaderComponent = () =>
+const CourseTableHeaderComponent = ({toggle}) =>
     <React.Fragment>
         <Route path={["/", "/table"]}
                exact={true}
@@ -17,7 +17,7 @@ const CourseTableHeaderComponent = () =>
                 </th>
                 <th className="wbdv-header wbdv-last-modified lastModified-collapse" scope="col">Last Modified by me</th>
                 <th scope="col">
-                    <button className="btn wbdv-button wbdv-grid-layout" >
+                    <button className="btn wbdv-button wbdv-grid-layout" onClick={toggle} >
                         <Link  className="black" to={`/grid`}>
                             <i className="fas fa-grip-horizontal"></i>
                         </Link>
@@ -46,7 +46,7 @@ const CourseTableHeaderComponent = () =>
                     <button className="btn wbdv-button wbdv-header wbdv-sort">
                         <i className="fas fa-sort-alpha-up"></i>
                     </button>
-                    <button className="btn wbdv-button wbdv-list-layout" >
+                    <button className="btn wbdv-button wbdv-list-layout" onClick={toggle} >
                         <Link className="black" to={`/table`}>
                             <i className="fas fa-list"></i>
                         </Link>
