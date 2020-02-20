@@ -1,5 +1,4 @@
 import {API_URL} from "../constants";
-import {createLesson, deleteLesson, findLessonForModule, updateLesson} from "./LessonService";
 
 //TODO: ADD TOPIC
 export const createTopic = (lessonId) =>
