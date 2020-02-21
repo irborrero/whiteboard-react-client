@@ -8,17 +8,19 @@ import {Provider} from "react-redux";
 import moduleReducer from "../../reducers/moduleReducer";
 import lessonReducer from "../../reducers/lessonReducer";
 import topicReducer from "../../reducers/topicReducer";
+import widgetReducer from "../../reducers/widgetReducer"
 
 
 const rootReducer = combineReducers({
     modules: moduleReducer,
     lessons: lessonReducer,
-    topics: topicReducer
+    topics: topicReducer,
+    widgets: widgetReducer
 })
 
 const store = createStore(rootReducer)
 
-const CourseEditorComponent = ({history, courseId, moduleId, lessonId, layout}) =>
+const CourseEditorComponent = ({history, courseId, moduleId, lessonId, topicId, layout}) =>
     <Provider store={store}>
     <div className="container-fluid">
         <div className="row especial-row">
@@ -66,7 +68,8 @@ const CourseEditorComponent = ({history, courseId, moduleId, lessonId, layout}) 
                     </div>
                 </div>
                 <div className="row">
-                    <WidgetListComponent/>
+                    <WidgetListComponent
+                        topicId={topicId}/>
                 </div>
             </div>
         </div>

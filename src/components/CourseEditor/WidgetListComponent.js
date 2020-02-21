@@ -1,40 +1,109 @@
+
 import React from "react";
+import {connect} from "react-redux";
+import Widget from "./widgets/Widget";
 
-const WidgetListComponent = () =>
-    <React.Fragment>
-        <form>
-            <div className="form-group heading">
-                <label className="heading-widget">Heading Widget</label>
-                <button className="btn arrow"><i className="fas fa-arrow-down"></i></button>
-                <button className="btn arrow"><i className="fas fa-arrow-up"></i></button>
-                <button className="btn btn-secondary btn-md dropdown-toggle"> Heading</button>
-                <button className="btn delete"><i className="fas fa-times"></i></button>
-            </div>
-            <div className="form-group">
-                <input className="form-control"
-                       placeholder="Heading Text"/>
-            </div>
-            <div className="form-group">
-                <select className="form-control">
-                    <option value="h1" selected="selected">Heading 1</option>
-                    <option value="h2">Heading 2</option>
-                    <option value="h3">Heading 3</option>
-                </select>
-            </div>
-            <div className="form-group">
-                <input className="form-control"
-                       placeholder="Widget Name"/>
-            </div>
-            <div className="form-group ">
-                <label className="preview-widget">Preview Widget</label>
-            </div>
-            <div className="form-group">
-                <label className="heading-text">Heading Text</label>
-            </div>
-        </form>
-    </React.Fragment>
+class WidgetListComponent extends React.Component {
+    componentDidMount() {
+        this.props.findWidgetsForTopic(this.props.topicId);
+    }
 
-export default WidgetListComponent
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.topicId !== this.props.topicId) {
+            this.props.findWidgetsForTopic(this.props.topicId);
+        }
+    }
+
+    state = {
+        widget: {}
+    }
+
+    save = () => {
+        this.setState({
+            widget: {}
+        })
+    }
 
 
+    render() {
+        return(
+            <div>
+                {
+                    this.props.widgets.map(widget =>
+                        <div key={widget.id}>
+                            <Widget
+                                save={this.save}
+                                editing={widget === this.state.widget}
+                                deleteWidget={this.props.deleteWidget}
+                                widget={widget}/>
 
+                            {   widget !== this.state.widget &&
+                            <button onClick={() =>
+                                this.setState({
+                                    widget: widget
+                                })}>
+                                ...
+                            </button>
+                            }
+                        </div>
+                    )
+                }
+                <button onClick={() =>
+                    this.props.createWidget(this.props.topicId)}>
+                    +
+                </button>
+            </div>
+        )
+    }
+}
+
+const dispatchToPropertyMapper = (dispatch) => ({
+    createWidget: (tid) =>
+        fetch(`http://localhost:8080/api/topics/${tid}/widgets`, {
+            method: "POST",
+            body: JSON.stringify({
+                id: (new Date()).getTime()+"",
+                title: "New Widget"
+            }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(response => response.json())
+            .then(actualWidget => dispatch({
+                type: "CREATE_WIDGET",
+                widget: actualWidget
+            })),
+    deleteWidget: (wid) =>
+        fetch(`http://localhost:8080/api/widgets/${wid}`, {
+            method: "DELETE"
+        })
+            .then(response => response.json())
+            .then(status => dispatch({
+                type: "DELETE_WIDGET",
+                widgetId: wid
+            })),
+    findWidgetsForTopic: (tid) =>
+        fetch(`http://localhost:8080/api/topics/${tid}/widgets`)
+            .then(response => response.json())
+            .then(widgets => dispatch({
+                type: "FIND_WIDGETS_FOR_TOPIC",
+                widgets: widgets
+            })),
+    findAllWidgets: () =>
+        // TODO: create a widget service
+        fetch("http://localhost:8080/api/widgets")
+            .then(response => response.json())
+            .then(widgets => dispatch({
+                type: "FIND_ALL_WIDGETS",
+                widgets: widgets
+            }))
+})
+
+const stateToPropertyMapper = (state) => ({
+    widgets: state.widgets.widgets
+})
+
+export default connect(
+    stateToPropertyMapper,
+    dispatchToPropertyMapper)
+(WidgetListComponent)
