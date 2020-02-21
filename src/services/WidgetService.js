@@ -4,7 +4,8 @@ export const createWidget = (tid, widget) => {
         body: JSON.stringify({
             name: "Widget" ,
             id: (new Date()).getTime() + "",
-            type: "HEADING"}),
+            type: "HEADING",
+            size: 1}),
         headers: {
             'content-type': 'application/json'
         }

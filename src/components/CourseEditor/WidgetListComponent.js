@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import WidgetComponent from "./WidgetComponent";
-import {findWidgetForTopic, createWidget, deleteWidget} from "../../actions/widgetActions";
+import {findWidgetForTopic, createWidget, deleteWidget, updateWidget} from "../../actions/widgetActions";
 import widgetService from '../../services/WidgetService'
 
 
@@ -20,40 +20,39 @@ class WidgetListComponent extends React.Component {
         widget: {},
     }
 
-    save = () => {
+    save = (widget) => {
         this.setState({
             widget: {}
         })
-        //this.props.updateWidget(widget.id, widget)
+
+        this.props.updateWidget(widget.id, widget)
+    }
+
+    selectWidget = (widget) => {
+        this.setState({
+            widget: widget
+        })
     }
 
 
     render() {
         return(
-            <div>
+            <React.Fragment>
                 {this.props.widgets && this.props.widgets.map(widget =>
-                        <div key={widget.id}>
+                        <React.Fragment key={widget.id}>
                             <WidgetComponent
                                 save={this.save}
+                                selectWidget = {this.selectWidget}
                                 editing={widget === this.state.widget}
                                 deleteWidget={this.props.deleteWidget}
                                 widget={widget}/>
-
-                            {   widget !== this.state.widget &&
-                            <button onClick={() =>
-                                this.setState({
-                                    widget: widget
-                                })}>
-                                ...
-                            </button>
-                            }
-                        </div>
+                        </React.Fragment>
                     )
                 }
-                <button onClick={() => this.props.createWidget(this.props.topicId)}>
-                    +
-                </button>
-            </div>
+                    <button className="btn add" onClick={() => this.props.createWidget(this.props.topicId)}>
+                        <i className="fa fa-plus-circle fa-4x"></i>
+                    </button>
+            </React.Fragment>
         )
     }
 }
@@ -69,7 +68,6 @@ const dispatchToPropertyMapper = (dispatch) => ({
     },
 
     deleteWidget: (wid) => {
-        console.log(wid)
         widgetService.deleteWidget(wid)
             .then(status =>
                 dispatch(deleteWidget(wid)))
@@ -90,6 +88,14 @@ const dispatchToPropertyMapper = (dispatch) => ({
                 dispatch(findWidgetForTopic(actualWidgets))
             })
     },
+
+    updateWidget: (wid, widget) => {
+        console.log(widget)
+        widgetService.updateWidget(wid,widget)
+            .then(status => {
+                dispatch(updateWidget(widget))
+            })
+    }
 })
 
 const stateToPropertyMapper = (state) => ({

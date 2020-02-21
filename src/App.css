@@ -309,6 +309,7 @@ row.course-title-row {
   color: white;
   border-radius: 5px;
   float: right;
+  margin-top: 4px;
 }
 
 .btn.save-btn:hover {
@@ -329,6 +330,7 @@ form{
   border: 2px solid darkgrey;
   border-radius: 5px;
   width: 90%;
+  padding: 15px;
 }
 
 .form-group {
@@ -336,9 +338,14 @@ form{
   margin-right: 10px;
 }
 
+.form-control {
+ margin-top: 20px;
+}
+
 .heading-widget {
   font-weight: bold;
   font-size: x-large;
+  margin-right: 300px;
 }
 
 .preview-widget {

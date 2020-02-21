@@ -33,6 +33,7 @@ const widgetReducer = (state = initialState, action) => {
             return {
                 widgets: state.widgets
             }
+
         default:
             return state
     }

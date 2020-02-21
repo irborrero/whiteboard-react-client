@@ -5,32 +5,27 @@ import ParagraphWidgetComponent from "./ParagraphWidgetComponent";
 export default class WidgetComponent extends React.Component {
     render() {
         return(
-            <div>
+            <React.Fragment>
                 {
                     this.props.widget.type === "HEADING" &&
                     <HeadingWidgetComponent
+                        save = {this.props.save}
+                        selectWidget = {this.props.selectWidget}
+                        deleteWidget = {this.props.deleteWidget}
                         editing={this.props.editing}
                         widget={this.props.widget}/>
                 }
                 {
                     this.props.widget.type === "PARAGRAPH" &&
                     <ParagraphWidgetComponent
+                        save ={this.props.save}
+                        selectWidget = {this.props.selectWidget}
+                        deleteWidget = {this.props.deleteWidget}
                         editing={this.props.editing}
                         widget={this.props.widget}/>
                 }
-                {   this.props.editing &&
-                <span>
-                        <button onClick={() =>
-                            this.props.deleteWidget(this.props.widget.id)}>
-                            X
-                        </button>
-                        <button onClick={() =>
-                            this.props.save()}>
-                            Save
-                        </button>
-                    </span>
-                }
-            </div>
+
+            </React.Fragment>
         )
     }
 }

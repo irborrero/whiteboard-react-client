@@ -56,17 +56,6 @@ const CourseEditorComponent = ({history, courseId, moduleId, lessonId, topicId, 
                 moduleId={moduleId}
                 courseId={courseId}
                 />
-
-                <div className="row">
-                    <div className="container">
-                        <button className="btn toggle-btn">
-                            <i className="fas fa-toggle-on fa-2x"></i>
-                        </button>
-                        <label className="preview-label">Preview</label>
-                        <button className="btn save-btn">Save</button>
-
-                    </div>
-                </div>
                 <div className="row">
                     <WidgetListComponent
                         lessonId={lessonId}
@@ -76,9 +65,6 @@ const CourseEditorComponent = ({history, courseId, moduleId, lessonId, topicId, 
                 </div>
             </div>
         </div>
-        <button className="btn add">
-            <i className="fa fa-plus-circle fa"></i>
-        </button>
     </div>
     </Provider>
 
