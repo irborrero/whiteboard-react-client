@@ -68,10 +68,13 @@ const dispatchToPropertyMapper = (dispatch) => ({
         }
     },
 
-    deleteWidget: (wid) =>
+    deleteWidget: (wid) => {
+        console.log(wid)
         widgetService.deleteWidget(wid)
             .then(status =>
-                dispatch(deleteWidget(wid))),
+                dispatch(deleteWidget(wid)))
+
+    },
 
     findWidgetsForTopic: (tid) => {
         widgetService.findWidgetsForTopic(tid)
