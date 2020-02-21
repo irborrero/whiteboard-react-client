@@ -47,9 +47,9 @@ export default class HeadingWidgetComponent extends React.Component {
                 {
                     !this.props.editing &&
                     <span>
-                             {this.state.widget.size === 1 && <h1>{this.state.widget.title}</h1>}
-                        {this.state.widget.size === 2 && <h2>{this.state.widget.title}</h2>}
-                        {this.state.widget.size === 3 && <h3>{this.state.widget.title}</h3>}
+                        {this.state.widget.size === 1 && <h1>{this.state.widget.name}</h1>}
+                        {this.state.widget.size === 2 && <h2>{this.state.widget.name}</h2>}
+                        {this.state.widget.size === 3 && <h3>{this.state.widget.name}</h3>}
                          </span>
                 }
             </div>

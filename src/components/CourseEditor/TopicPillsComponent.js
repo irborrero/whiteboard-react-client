@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux"
 import {findTopicForLesson, selectTopic, deleteTopic, updateTopic, createTopic, editTopic} from "../../actions/topicActions";
 import topicService from '../../services/TopicService'
+import {Link} from "react-router-dom";
 
 
 class TopicPillsComponent extends React.Component {
@@ -26,7 +27,11 @@ class TopicPillsComponent extends React.Component {
                     {
                         this.props.selectedTopic !== topic._id &&
                             <li className="nav-item topic">
-                                <label className="nav-link"  onClick={() => this.props.selectTopic(topic._id)}>{topic.title}</label>
+                                <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${topic._id}`}>
+                                    <label className="nav-link"  onClick={() => this.props.selectTopic(topic._id)}>
+                                        {topic.title}
+                                    </label>
+                                </Link>
                                 <button className="btn wbdv-row wbdv-button wbdv-edit white" onClick={() => this.props.editTopic(topic._id)}>
                                     <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
                                 </button>
@@ -38,7 +43,11 @@ class TopicPillsComponent extends React.Component {
                                 {
                                     this.props.editingTopic !== topic._id &&
                                     <li className="nav-item topic red">
-                                        <label className="nav-link">{topic.title}</label>
+                                        <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${topic._id}`}>
+                                            <label className="nav-link"  onClick={() => this.props.selectTopic(topic._id)}>
+                                                {topic.title}
+                                            </label>
+                                        </Link>
                                         <button className="btn wbdv-row wbdv-button wbdv-edit white" onClick={() => this.props.editTopic(topic._id)}>
                                             <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
                                         </button>
@@ -107,7 +116,6 @@ const dispatchToPropertyMapper = (dispatch)  => {
         },
 
         createTopic: (lessonId) => {
-            console.log(lessonId)
             if(lessonId !== undefined) {
                 topicService.createTopic(lessonId)
                     .then(actualTopic =>

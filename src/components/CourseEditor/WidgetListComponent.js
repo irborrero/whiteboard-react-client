@@ -1,11 +1,13 @@
-
 import React from "react";
 import {connect} from "react-redux";
-import Widget from "./widgets/Widget";
+import WidgetComponent from "./WidgetComponent";
+import {findWidgetForTopic, createWidget, deleteWidget} from "../../actions/widgetActions";
+import widgetService from '../../services/WidgetService'
+
 
 class WidgetListComponent extends React.Component {
     componentDidMount() {
-        this.props.findWidgetsForTopic(this.props.topicId);
+            this.props.findWidgetsForTopic(this.props.topicId);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -15,23 +17,23 @@ class WidgetListComponent extends React.Component {
     }
 
     state = {
-        widget: {}
+        widget: {},
     }
 
     save = () => {
         this.setState({
             widget: {}
         })
+        //this.props.updateWidget(widget.id, widget)
     }
 
 
     render() {
         return(
             <div>
-                {
-                    this.props.widgets.map(widget =>
+                {this.props.widgets && this.props.widgets.map(widget =>
                         <div key={widget.id}>
-                            <Widget
+                            <WidgetComponent
                                 save={this.save}
                                 editing={widget === this.state.widget}
                                 deleteWidget={this.props.deleteWidget}
@@ -48,8 +50,7 @@ class WidgetListComponent extends React.Component {
                         </div>
                     )
                 }
-                <button onClick={() =>
-                    this.props.createWidget(this.props.topicId)}>
+                <button onClick={() => this.props.createWidget(this.props.topicId)}>
                     +
                 </button>
             </div>
@@ -58,49 +59,38 @@ class WidgetListComponent extends React.Component {
 }
 
 const dispatchToPropertyMapper = (dispatch) => ({
-    createWidget: (tid) =>
-        fetch(`http://localhost:8080/api/topics/${tid}/widgets`, {
-            method: "POST",
-            body: JSON.stringify({
-                id: (new Date()).getTime()+"",
-                title: "New Widget"
-            }),
-            headers: {
-                'content-type': 'application/json'
-            }
-        }).then(response => response.json())
-            .then(actualWidget => dispatch({
-                type: "CREATE_WIDGET",
-                widget: actualWidget
-            })),
+
+    createWidget: (tid) => {
+        if (tid !== undefined) {
+            widgetService.createWidget(tid)
+                .then(actualWidget =>
+                    dispatch(createWidget(actualWidget)))
+        }
+    },
+
     deleteWidget: (wid) =>
-        fetch(`http://localhost:8080/api/widgets/${wid}`, {
-            method: "DELETE"
-        })
-            .then(response => response.json())
-            .then(status => dispatch({
-                type: "DELETE_WIDGET",
-                widgetId: wid
-            })),
-    findWidgetsForTopic: (tid) =>
-        fetch(`http://localhost:8080/api/topics/${tid}/widgets`)
-            .then(response => response.json())
-            .then(widgets => dispatch({
-                type: "FIND_WIDGETS_FOR_TOPIC",
-                widgets: widgets
-            })),
-    findAllWidgets: () =>
-        // TODO: create a widget service
-        fetch("http://localhost:8080/api/widgets")
-            .then(response => response.json())
-            .then(widgets => dispatch({
-                type: "FIND_ALL_WIDGETS",
-                widgets: widgets
-            }))
+        widgetService.deleteWidget(wid)
+            .then(status =>
+                dispatch(deleteWidget(wid))),
+
+    findWidgetsForTopic: (tid) => {
+        widgetService.findWidgetsForTopic(tid)
+            .then(actualWidgets => {
+                dispatch(findWidgetForTopic(actualWidgets))
+            })
+
+    },
+
+    findAllWidgets: () => {
+        widgetService.findAllWidgets()
+            .then(actualWidgets => {
+                dispatch(findWidgetForTopic(actualWidgets))
+            })
+    },
 })
 
 const stateToPropertyMapper = (state) => ({
-    widgets: state.widgets.widgets
+    widgets: state.widgets.widgets,
 })
 
 export default connect(

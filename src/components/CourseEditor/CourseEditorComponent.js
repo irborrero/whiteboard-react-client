@@ -69,6 +69,9 @@ const CourseEditorComponent = ({history, courseId, moduleId, lessonId, topicId, 
                 </div>
                 <div className="row">
                     <WidgetListComponent
+                        lessonId={lessonId}
+                        moduleId={moduleId}
+                        courseId={courseId}
                         topicId={topicId}/>
                 </div>
             </div>

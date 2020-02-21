@@ -101,7 +101,6 @@ const dispatchToPropertyMapper = (dispatch) => {
             dispatch(editModule(moduleId)),
 
         selectModule: (moduleId) => {
-            console.log(moduleId)
             dispatch(selectModule(moduleId))
         },
         updateModule: (moduleId, module) => {

@@ -1,19 +1,18 @@
 import {CREATE_WIDGET, DELETE_WIDGET, FIND_ALL_WIDGETS_FOR_TOPIC, FIND_WIDGET, UPDATE_WIDGET} from "../actions/widgetActions";
-import {FIND_TOPIC, UPDATE_TOPIC} from "../actions/topicActions";
 
-const widgets=[
-    {id: "123", title: "Widget 123"},
-    {id: "234", title: "Widget 234"},
-    {id: "345", title: "Widget 345"}
-]
+const initialState = {
+    widgets: []
+}
 
-const widgetReducer = (state = {widgets: widgets}, action) => {
+
+
+const widgetReducer = (state = initialState, action) => {
     switch (action.type) {
         case CREATE_WIDGET:
             return {
                 widgets: [
                     ...state.widgets,
-                    action.widget
+                    action.newWidget
                 ]
             }
         case DELETE_WIDGET:
@@ -38,3 +37,5 @@ const widgetReducer = (state = {widgets: widgets}, action) => {
             return state
     }
 }
+
+export default widgetReducer
