@@ -13,9 +13,33 @@ export default class HeadingWidgetComponent extends React.Component {
                     this.props.editing &&
                     <div>
                         <div className="form-group heading">
-                            <label className="heading-widget">Heading Widget</label>
-                            <button className="btn arrow"><i className="fas fa-arrow-down"></i></button>
-                            <button className="btn arrow"><i className="fas fa-arrow-up"></i></button>
+                            <label className="heading-widget"
+                            >Heading Widget</label>
+                            <button className="btn arrow"
+                            onClick={() => {
+                                let newOrder = this.state.widget.order +1
+                                this.setState(prevState => ({
+                                    widget: {
+                                        ...prevState.widget,
+                                        order: newOrder
+                                    }
+                                }))
+
+                                console.log(this.state.widget)
+                                this.props.updateWidget(this.state.widget)
+                            }}>
+                                <i className="fas fa-arrow-down"></i></button>
+                            <button className="btn arrow"
+                                    onClick={() => {
+                                        let newOrder = this.state.widget.order -1
+                                        this.setState(prevState => ({
+                                            widget: {
+                                                ...prevState.widget,
+                                                order: newOrder
+                                            }
+                                        }))
+                                        this.props.updateWidget(this.state.widget)
+                                    }}><i className="fas fa-arrow-up"></i></button>
                             <select
                                     onChange={(e) => {
                                         let newType = e.target.value
@@ -26,6 +50,7 @@ export default class HeadingWidgetComponent extends React.Component {
                                                 type: newType
                                             }
                                         }))
+                                        this.props.updateWidget(this.state.widget)
                                     }}
                                     value={this.state.widget.type}>
                                 <option value={"HEADING"}>Heading</option>

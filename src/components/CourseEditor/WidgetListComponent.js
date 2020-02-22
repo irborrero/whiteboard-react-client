@@ -43,6 +43,7 @@ class WidgetListComponent extends React.Component {
                             <WidgetComponent
                                 save={this.save}
                                 selectWidget = {this.selectWidget}
+                                updateWidget = {this.props.updateWidget}
                                 editing={widget === this.state.widget}
                                 deleteWidget={this.props.deleteWidget}
                                 widget={widget}/>
@@ -90,6 +91,7 @@ const dispatchToPropertyMapper = (dispatch) => ({
     },
 
     updateWidget: (wid, widget) => {
+        console.log(widget)
         widgetService.updateWidget(wid,widget)
             .then(status => {
                 dispatch(updateWidget(widget))

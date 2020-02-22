@@ -10,6 +10,7 @@ export default class WidgetComponent extends React.Component {
                     this.props.widget.type === "HEADING" &&
                     <HeadingWidgetComponent
                         save = {this.props.save}
+                        updateWidget = {this.props.updateWidget}
                         selectWidget = {this.props.selectWidget}
                         deleteWidget = {this.props.deleteWidget}
                         editing={this.props.editing}
@@ -19,6 +20,7 @@ export default class WidgetComponent extends React.Component {
                     this.props.widget.type === "PARAGRAPH" &&
                     <ParagraphWidgetComponent
                         save = {this.props.save}
+                        updateWidget = {this.props.updateWidget}
                         selectWidget = {this.props.selectWidget}
                         deleteWidget = {this.props.deleteWidget}
                         editing={this.props.editing}
