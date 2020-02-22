@@ -90,7 +90,6 @@ const dispatchToPropertyMapper = (dispatch) => ({
     },
 
     updateWidget: (wid, widget) => {
-        console.log(widget)
         widgetService.updateWidget(wid,widget)
             .then(status => {
                 dispatch(updateWidget(widget))

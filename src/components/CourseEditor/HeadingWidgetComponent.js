@@ -16,7 +16,21 @@ export default class HeadingWidgetComponent extends React.Component {
                             <label className="heading-widget">Heading Widget</label>
                             <button className="btn arrow"><i className="fas fa-arrow-down"></i></button>
                             <button className="btn arrow"><i className="fas fa-arrow-up"></i></button>
-                            <button className="btn btn-secondary btn-md dropdown-toggle">Heading</button>
+                            <select
+                                    onChange={(e) => {
+                                        let newType = e.target.value
+                                        newType = String(newType)
+                                        this.setState(prevState => ({
+                                            widget: {
+                                                ...prevState.widget,
+                                                type: newType
+                                            }
+                                        }))
+                                    }}
+                                    value={this.state.widget.type}>
+                                <option value={"HEADING"}>Heading</option>
+                                <option value={"PARAGRAPH"}>Paragraph</option>
+                            </select>
                             <button className="btn delete" onClick={() => this.props.deleteWidget(this.props.widget.id)}>
                                 <i className="fas fa-times"></i>
                             </button>
@@ -74,7 +88,7 @@ export default class HeadingWidgetComponent extends React.Component {
                     !this.props.editing &&
                         <React.Fragment>
                             <div>
-                                <h3>Preview</h3>
+                                <h3>Preview Heading</h3>
                                 <button className="btn wbdv-row wbdv-button wbdv-edit" onClick={() => this.props.selectWidget(this.state.widget)}>
                                     <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
                                 </button>

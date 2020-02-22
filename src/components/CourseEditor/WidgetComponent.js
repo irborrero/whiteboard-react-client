@@ -18,7 +18,7 @@ export default class WidgetComponent extends React.Component {
                 {
                     this.props.widget.type === "PARAGRAPH" &&
                     <ParagraphWidgetComponent
-                        save ={this.props.save}
+                        save = {this.props.save}
                         selectWidget = {this.props.selectWidget}
                         deleteWidget = {this.props.deleteWidget}
                         editing={this.props.editing}
