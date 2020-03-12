@@ -14,6 +14,18 @@ export const createWidget = (tid, widget) => {
 
 }
 
+export const findAllWidgets = async () => {
+    const response = await fetch(`https://mighty-peak-17360.herokuapp.com/api/widgets`)
+    return await response.json()
+}
+
+
+export const findWidgetById = async (wid) => {
+    const response = await fetch(`https://mighty-peak-17360.herokuapp.com/api/widgets/${wid}`)
+    return await  response.json()
+}
+
+
 export const deleteWidget = (wid) => {
  return fetch(`https://mighty-peak-17360.herokuapp.com/api/widgets/${wid}`, {
         method: "DELETE"
@@ -24,17 +36,6 @@ export const deleteWidget = (wid) => {
 export const findWidgetsForTopic = (tid) =>
     fetch(`https://mighty-peak-17360.herokuapp.com/api/topics/${tid}/widgets`)
         .then(response => response.json())
-
-
-export const findAllWidgets = async () => {
-    const response = await fetch(`https://mighty-peak-17360.herokuapp.com/api/widgets`)
-    return await response.json()
-}
-
-export const findWidgetById = async (wid) => {
-    const response = await fetch(`https://mighty-peak-17360.herokuapp.com/api/widgets/${wid}`)
-    return await  response.json()
-}
 
 export const updateWidget = async (wid, widget) => {
     return fetch(`https://mighty-peak-17360.herokuapp.com/api/widgets/${wid}`, {
