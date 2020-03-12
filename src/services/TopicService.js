@@ -11,6 +11,16 @@ export const createTopic = (lessonId) =>
     })
         .then(response => response.json())
 
+
+export const findAllTopics =() =>
+    fetch(`${API_URL}/topics`)
+        .then(response => response.json())
+
+export const findTopic = async (topicId) => {
+    const response = await fetch(`${API_URL}/topics/${topicId}`)
+    return await  response.json()
+}
+
 export const findTopicForLesson = (lessonId) =>
     fetch(`${API_URL}/lessons/${lessonId}/topics`)
         .then(response => response.json())
@@ -21,12 +31,6 @@ export const deleteTopic = (topicId) =>
         method: "DELETE"
     })
         .then(response => response.json())
-
-
-export const findTopic = async (topicId) => {
-    const response = await fetch(`${API_URL}/topics/${topicId}`)
-    return await  response.json()
-}
 
 
 export const updateTopic = async (topicId, topic) => {
