@@ -1,9 +1,8 @@
 export const createWidget = (tid, widget) => {
-   return fetch(`https://mighty-peak-17360.herokuapp.com/api/topics/${tid}/widgets`, {
+   return fetch(`http://localhost:8080/api/topics/${tid}/widgets`, {
         method: "POST",
         body: JSON.stringify({
             name: "Widget" ,
-            id: (new Date()).getTime() + "",
             type: "HEADING",
             size: 1}),
         headers: {
@@ -15,30 +14,31 @@ export const createWidget = (tid, widget) => {
 }
 
 export const findAllWidgets = async () => {
-    const response = await fetch(`https://mighty-peak-17360.herokuapp.com/api/widgets`)
+    const response = await fetch(`http://localhost:8080/api/widgets`)
     return await response.json()
 }
 
 
 export const findWidgetById = async (wid) => {
-    const response = await fetch(`https://mighty-peak-17360.herokuapp.com/api/widgets/${wid}`)
+    const response = await fetch(`http://localhost:8080/api/widgets/${wid}`)
     return await  response.json()
 }
 
 
 export const deleteWidget = (wid) => {
- return fetch(`https://mighty-peak-17360.herokuapp.com/api/widgets/${wid}`, {
+ return fetch(`http://localhost:8080/api/widgets/${wid}`, {
         method: "DELETE"
     })
         .then(response => response.json())
 }
 
 export const findWidgetsForTopic = (tid) =>
-    fetch(`https://mighty-peak-17360.herokuapp.com/api/topics/${tid}/widgets`)
-        .then(response => response.json())
+        fetch(`http://localhost:8080/api/topics/${tid}/widgets`)
+            .then(response => response.json())
+
 
 export const updateWidget = async (wid, widget) => {
-    return fetch(`https://mighty-peak-17360.herokuapp.com/api/widgets/${wid}`, {
+    return fetch(`http://localhost:8080/api/widgets/${wid}`, {
         method: 'PUT',
         body: JSON.stringify(widget),
         headers: {

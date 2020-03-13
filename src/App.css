@@ -197,6 +197,14 @@ row.course-title-row {
   color: white;
 }
 
+.nav-link.tab {
+  background-color: #901c13;
+}
+
+.nav-link.tab.blue {
+  background-color: #4F86ED;
+}
+
 .nav-link.tab:hover {
   background-color: #4F86ED;
   border: 0px;
@@ -281,6 +289,7 @@ row.course-title-row {
   border-radius: 5px;
   background-color:#4F86ED;
 }
+
 
 .nav-link {
   color: white;

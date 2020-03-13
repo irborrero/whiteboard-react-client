@@ -17,7 +17,7 @@ class ModuleListComponent extends React.Component {
                     {this.props.modules && this.props.modules.map(module =>
                         <React.Fragment>
                             {
-                                this.props.selectedModule !== module._id &&
+                                this.props.moduleId !== module._id &&
                                 <li key={module._id} className="list-group-item wbdv-module-item">
                                     <Link className = "white-module" to={`/course/${this.props.courseId}/module/${module._id}`}>
                                         <label className="wbdv-module-item-title"  onClick={() => this.props.selectModule(module._id)} >{module.title}</label>
@@ -30,7 +30,7 @@ class ModuleListComponent extends React.Component {
                             }
 
                             {
-                                this.props.selectedModule === module._id &&
+                                this.props.moduleId === module._id &&
                                     <React.Fragment>
                                         {
                                             this.props.editingModule !== module._id &&
@@ -74,8 +74,7 @@ class ModuleListComponent extends React.Component {
 const stateToPropertyMapper = (state) => {
     return {
         modules: state.modules.modules,
-        editingModule: state.modules.editingModule,
-        selectedModule: state.modules.selectedModule
+        editingModule: state.modules.editingModule
     }
 }
 

@@ -61,11 +61,9 @@ class WidgetListComponent extends React.Component {
 const dispatchToPropertyMapper = (dispatch) => ({
 
     createWidget: (tid) => {
-        if (tid !== undefined) {
-            widgetService.createWidget(tid)
+            widgetService.createWidget(parseInt(tid))
                 .then(actualWidget =>
                     dispatch(createWidget(actualWidget)))
-        }
     },
 
     deleteWidget: (wid) => {
@@ -76,11 +74,13 @@ const dispatchToPropertyMapper = (dispatch) => ({
     },
 
     findWidgetsForTopic: (tid) => {
-        widgetService.findWidgetsForTopic(tid)
-            .then(actualWidgets => {
-                dispatch(findWidgetForTopic(actualWidgets))
-            })
-
+           tid =  parseInt(tid);
+           if(!isNaN(tid)) {
+               widgetService.findWidgetsForTopic(tid)
+                   .then(actualWidgets => {
+                       dispatch(findWidgetForTopic(actualWidgets))
+                   })
+           }
     },
 
     findAllWidgets: () => {
@@ -91,7 +91,6 @@ const dispatchToPropertyMapper = (dispatch) => ({
     },
 
     updateWidget: (wid, widget) => {
-        console.log(widget)
         widgetService.updateWidget(wid,widget)
             .then(status => {
                 dispatch(updateWidget(widget))

@@ -31,7 +31,7 @@ const topicReducer = (state = initialState, action) => {
             return {
                 selectedTopic: "",
                 editingTopic: "",
-                topics: state.topics.filter(topic => topic._id !== action.topicId)
+                topics: state.topics.filter(topic => topic.id !== action.topicId)
             }
 
         case EDIT_TOPIC:

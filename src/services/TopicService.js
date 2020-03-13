@@ -1,10 +1,9 @@
 import {API_URL} from "../constants";
 
-//TODO: ADD TOPIC
 export const createTopic = (lessonId) =>
-    fetch(`${API_URL}/lessons/${lessonId}/topics`, {
+    fetch(`http://localhost:8080/api/lessons/${lessonId}/topics`, {
         method: "POST",
-        body: JSON.stringify({title: "Topic"}),
+        body: JSON.stringify({title: "Topic", lesson: lessonId}),
         headers: {
             'content-type': 'application/json'
         }
@@ -13,28 +12,31 @@ export const createTopic = (lessonId) =>
 
 
 export const findAllTopics =() =>
-    fetch(`${API_URL}/topics`)
+    fetch(`http://localhost:8080/api/topics`)
         .then(response => response.json())
 
+
 export const findTopic = async (topicId) => {
-    const response = await fetch(`${API_URL}/topics/${topicId}`)
+    const response = await fetch(`http://localhost:8080/api/topics/${topicId}`)
     return await  response.json()
 }
 
 export const findTopicForLesson = (lessonId) =>
-    fetch(`${API_URL}/lessons/${lessonId}/topics`)
+    fetch(`http://localhost:8080/api/lessons/${lessonId}/topics`)
         .then(response => response.json())
 
 
+
+
 export const deleteTopic = (topicId) =>
-    fetch(`${API_URL}/topics/${topicId}`, {
+    fetch(`http://localhost:8080/api/topics/${topicId}`, {
         method: "DELETE"
     })
         .then(response => response.json())
 
 
 export const updateTopic = async (topicId, topic) => {
-    return fetch(`${API_URL}/topics/${topicId}`, {
+    return fetch(`http://localhost:8080/api/topics/${topicId}`, {
         method: 'PUT',
         body: JSON.stringify(topic),
         headers: {

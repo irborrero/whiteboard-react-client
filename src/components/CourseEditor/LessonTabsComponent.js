@@ -14,7 +14,7 @@ class LessonTabsComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.moduleId != this.props.moduleId) {
+        if(prevProps.moduleId !== this.props.moduleId) {
             this.props.updateLessonForModule(this.props.moduleId)
         }
     }
@@ -31,8 +31,7 @@ class LessonTabsComponent extends React.Component {
                        <React.Fragment>
                            {
                                this.props.selectedLesson !== lesson._id &&
-                               <li className="nav-item ">
-                                   <div className="nav-link tab">
+                               <li className="nav-item nav-link tab">
                                        <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${lesson._id}`}>
                                            <label onClick={() => this.props.selectLesson(lesson._id)}>
                                                {lesson.title}
@@ -41,7 +40,6 @@ class LessonTabsComponent extends React.Component {
                                            <button className="btn wbdv-row wbdv-button wbdv-edit white "  onClick={() => this.props.editLesson(lesson._id)}>
                                                <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit "></i>
                                            </button>
-                                   </div>
                                </li>
                            }
                            {
@@ -49,7 +47,7 @@ class LessonTabsComponent extends React.Component {
                                    <React.Fragment>
                                        {
                                            this.props.editingLesson === lesson._id &&
-                                           <li className="nav-item blue nav-link tab">
+                                           <li className="nav-item nav-link blue tab">
                                                <input id="lessonTitle" className="input"  placeholder={lesson.title}/>
                                                <button className="btn wbdv-module-item-delete-btn"
                                                        onClick={() => this.props.deleteLesson(lesson._id)}>
