@@ -3,6 +3,7 @@ export const DELETE_WIDGET = "DELETE_WIDGET"
 export const FIND_ALL_WIDGETS_FOR_TOPIC =  "FIND_ALL_WIDGETS_FOR_TOPIC"
 export const FIND_WIDGET = "FIND_TOPIC"
 export const UPDATE_WIDGET= "UPDATE_WIDGET"
+export const HIDE_WIDGETS= "HIDE_WIDGETS"
 
 
 export const createWidget = (widget) => ({
@@ -29,4 +30,8 @@ export const findWidget = (widgetId) => ({
 export const updateWidget = (widget) => ({
     type: UPDATE_WIDGET,
     newWidget: widget
+})
+
+export const hideWidgets = () => ({
+    type: HIDE_WIDGETS
 })

@@ -54,6 +54,8 @@ export default class ParagraphWidget extends React.Component {
                                 value={this.state.widget.type}>
                                 <option value={"HEADING"}>Heading</option>
                                 <option value={"PARAGRAPH"}>Paragraph</option>
+                                <option value={"LIST"}>List</option>
+                                <option value={"IMAGE"}>Image</option>
                             </select>
                             <button className="btn delete"
                                     onClick={() => this.props.deleteWidget(this.props.widget.id)}>

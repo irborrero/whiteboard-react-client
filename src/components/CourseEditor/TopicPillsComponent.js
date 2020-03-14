@@ -58,7 +58,9 @@ class TopicPillsComponent extends React.Component {
                                     <li className="nav-item topic red">
                                         <input id="topicTitle" className="input"  placeholder={topic.title}/>
                                         <button className="btn wbdv-module-item-delete-btn" onClick={() => this.props.deleteTopic(topic.id)}>
-                                            <i className="fas fa-times"></i>
+                                            <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>
+                                                    <i className=" white-module fas fa-times"></i>
+                                            </Link>
                                         </button>
                                         <button className="btn wbdv-row wbdv-button wbdv-save white" onClick={() => this.props.updateTopic(topic.id, topic)}>
                                             <i className="fas fa-check wbdv-button wbdv-save"></i>

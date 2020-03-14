@@ -54,17 +54,19 @@ const CourseEditorComponent = ({history, courseId, moduleId, lessonId, topicId, 
 
             <div className="col-8">
             <TopicPillsComponent
+                topicId={topicId}
                 lessonId={lessonId}
                 moduleId={moduleId}
                 courseId={courseId}
-                topicId={topicId}
                 />
+
                 <div className="row">
                     <WidgetListComponent
+                        topicId={topicId}
                         lessonId={lessonId}
                         moduleId={moduleId}
                         courseId={courseId}
-                        topicId={topicId}/>
+                        />
                 </div>
             </div>
         </div>

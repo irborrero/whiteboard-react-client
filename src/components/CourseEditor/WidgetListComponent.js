@@ -1,11 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
 import WidgetComponent from "./WidgetComponent";
-import {findWidgetForTopic, createWidget, deleteWidget, updateWidget} from "../../actions/widgetActions";
+import {findWidgetForTopic, createWidget, deleteWidget, updateWidget, hideWidgets} from "../../actions/widgetActions";
 import widgetService from '../../services/WidgetService'
 
 
 class WidgetListComponent extends React.Component {
+
     componentDidMount() {
             this.props.findWidgetsForTopic(this.props.topicId);
     }
@@ -13,8 +14,9 @@ class WidgetListComponent extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.topicId !== this.props.topicId) {
             this.props.findWidgetsForTopic(this.props.topicId);
-        }
+       }
     }
+
 
     state = {
         widget: {},
@@ -80,6 +82,8 @@ const dispatchToPropertyMapper = (dispatch) => ({
                    .then(actualWidgets => {
                        dispatch(findWidgetForTopic(actualWidgets))
                    })
+           } else {
+                dispatch(hideWidgets())
            }
     },
 
