@@ -265,8 +265,8 @@ row.course-title-row {
 
 .custom-col {
   background-color: #901c13;
+  position: relative;
   min-height: 100vh;
-  height: 100%;
 
 }
 

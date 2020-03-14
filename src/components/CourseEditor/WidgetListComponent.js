@@ -25,7 +25,7 @@ class WidgetListComponent extends React.Component {
             widget: {}
         })
 
-        this.props.updateWidget(widget.id, widget)
+        this.props.updateWidget(widget.id, widget);
     }
 
     selectWidget = (widget) => {
@@ -91,7 +91,7 @@ const dispatchToPropertyMapper = (dispatch) => ({
     },
 
     updateWidget: (wid, widget) => {
-        widgetService.updateWidget(wid,widget)
+        widgetService.updateWidget(wid, widget)
             .then(status => {
                 dispatch(updateWidget(widget))
             })

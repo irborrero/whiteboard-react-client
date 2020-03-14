@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
-import {findTopicForLesson, selectTopic, deleteTopic, updateTopic, createTopic, editTopic} from "../../actions/topicActions";
+import {findTopicForLesson, deleteTopic, updateTopic, createTopic, editTopic} from "../../actions/topicActions";
 import topicService from '../../services/TopicService'
 import {Link} from "react-router-dom";
 
@@ -25,10 +25,10 @@ class TopicPillsComponent extends React.Component {
                 {this.props.topics && this.props.topics.map(topic =>
                     <React.Fragment>
                     {
-                        this.props.selectedTopic !== topic.id &&
+                        parseInt(this.props.topicId) !== parseInt(topic.id) &&
                             <li className="nav-item topic">
                                 <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${topic.id}`}>
-                                    <label className="nav-link"  onClick={() => this.props.selectTopic(topic.id)}>
+                                    <label className="nav-link">
                                         {topic.title}
                                     </label>
                                 </Link>
@@ -38,13 +38,13 @@ class TopicPillsComponent extends React.Component {
                             </li>
                     }
                     {
-                        this.props.selectedTopic === topic.id &&
+                        parseInt(this.props.topicId)=== parseInt(topic.id) &&
                             <React.Fragment>
                                 {
                                     this.props.editingTopic !== topic.id &&
                                     <li className="nav-item topic red">
                                         <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${topic.id}`}>
-                                            <label className="nav-link"  onClick={() => this.props.selectTopic(topic.id)}>
+                                            <label className="nav-link">
                                                 {topic.title}
                                             </label>
                                         </Link>
@@ -83,7 +83,6 @@ class TopicPillsComponent extends React.Component {
 const stateToPropertyMapper = (state) => {
     return {
         topics: state.topics.topics,
-        selectedTopic: state.topics.selectedTopic,
         editingTopic: state.topics.editingTopic
     }
 }
@@ -94,9 +93,6 @@ const dispatchToPropertyMapper = (dispatch)  => {
             topicService.findTopicForLesson(lessonId)
                 .then(actualTopics => {
                     dispatch(findTopicForLesson(actualTopics, lessonId))}),
-
-        selectTopic: (topicId) =>
-            dispatch(selectTopic(topicId)),
 
         editTopic: (topicId) =>
             dispatch(editTopic(topicId)),

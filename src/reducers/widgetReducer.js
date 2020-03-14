@@ -21,7 +21,7 @@ const widgetReducer = (state = initialState, action) => {
             }
         case FIND_ALL_WIDGETS_FOR_TOPIC:
             return {
-                widgets: action.widgets
+                widgets: action.actualWidgets
             }
 
         case FIND_WIDGET:

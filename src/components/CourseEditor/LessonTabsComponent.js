@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
-import {findLessonForModule, selectLesson, deleteLesson, editLesson, updateLesson, createLesson, findCourseById, updateLessonForModule} from "../../actions/lessonActions";
+import {findLessonForModule, deleteLesson, editLesson, updateLesson, createLesson, findCourseById, updateLessonForModule} from "../../actions/lessonActions";
 import lessonService from '../../services/LessonService'
 import courseService from '../../services/CourseService'
 import {Link} from "react-router-dom";
@@ -30,10 +30,10 @@ class LessonTabsComponent extends React.Component {
                    {this.props.lessons && this.props.lessons.map(lesson =>
                        <React.Fragment>
                            {
-                               this.props.selectedLesson !== lesson._id &&
+                               this.props.lessonId !== lesson._id &&
                                <li className="nav-item nav-link tab">
                                        <Link className = "white-module" to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${lesson._id}`}>
-                                           <label onClick={() => this.props.selectLesson(lesson._id)}>
+                                           <label>
                                                {lesson.title}
                                            </label>
                                        </Link>
@@ -43,7 +43,7 @@ class LessonTabsComponent extends React.Component {
                                </li>
                            }
                            {
-                               this.props.selectedLesson === lesson._id &&
+                               this.props.lessonId === lesson._id &&
                                    <React.Fragment>
                                        {
                                            this.props.editingLesson === lesson._id &&
@@ -93,7 +93,6 @@ const stateToPropertyMapper = (state) => {
     return {
         course: state.lessons.course,
         lessons: state.lessons.lessons,
-        selectedLesson: state.lessons.selectedLesson,
         editingLesson: state.lessons.editingLesson
     }
 
@@ -117,9 +116,6 @@ const dispatchToPropertyMapper = (dispatch)  => {
                 .then(actualLessons => {
                     dispatch(updateLessonForModule(actualLessons))
                 }),
-
-        selectLesson: (lessonId) =>
-            dispatch(selectLesson(lessonId)),
 
         editLesson: (lessonId) =>
             dispatch(editLesson((lessonId))),

@@ -4,7 +4,6 @@ export const FIND_MODULE_FOR_COURSE =  "FIND_MODULES_FOR_COURSE"
 export const FIND_MODULE = "FIND_MODULE"
 export const UPDATE_MODULE = "UPDATE_MODULE"
 export const EDIT_MODULE = "EDIT_MODULE"
-export const SELECT_MODULE = "SELECT_MODULE"
 
 export const createModule = (module) => ({
     type: CREATE_MODULE,
@@ -24,11 +23,6 @@ export const findModuleForCourse = (actualModules) => ({
 export const editModule = (moduleId) => ({
     type: EDIT_MODULE,
     editingModule: moduleId
-})
-
-export const selectModule = (moduleId) => ({
-    type: SELECT_MODULE,
-    selectedModule: moduleId
 })
 
 export const findModule = (moduleId) => ({

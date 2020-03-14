@@ -1,9 +1,8 @@
-import {CREATE_LESSON, FIND_LESSON_FOR_MODULE, FIND_LESSON, UPDATE_LESSON, DELETE_LESSON, SELECT_LESSON, EDIT_LESSON, FIND_COURSE_BY_ID, UPDATE_LESSON_FOR_MODULE} from "../actions/lessonActions";
+import {CREATE_LESSON, FIND_LESSON_FOR_MODULE, FIND_LESSON, UPDATE_LESSON, DELETE_LESSON, EDIT_LESSON, FIND_COURSE_BY_ID, UPDATE_LESSON_FOR_MODULE} from "../actions/lessonActions";
 import {EDIT_MODULE} from "../actions/moduleActions";
 
 const initialState = {
     course: "",
-    selectedLesson: "",
     editingLesson: "",
     lessons: [
         {title: "Lesson 0000", _id: "000"},
@@ -19,7 +18,6 @@ const lessonReducer = (state = initialState, action) => {
         case FIND_LESSON_FOR_MODULE:
             return {
                 course: state.course,
-                selectedLesson: "",
                 editingLesson:"",
                 lessons: action.lessons
             }
@@ -27,7 +25,6 @@ const lessonReducer = (state = initialState, action) => {
         case CREATE_LESSON:
             return {
                 course: state.course,
-                selectedLesson: state.selectedLesson,
                 editingLesson: state.editingLesson,
                 lessons: [
                     ...state.lessons,
@@ -38,23 +35,13 @@ const lessonReducer = (state = initialState, action) => {
         case DELETE_LESSON:
             return {
                 course: state.course,
-                selectedLesson: "",
                 editingLesson: "",
                 lessons: state.lessons.filter(lesson => lesson._id !== action.lessonId)
-            }
-
-        case SELECT_LESSON:
-            return {
-                course: state.course,
-                lessons: state.lessons,
-                selectedLesson: action.selectedLesson,
-                editingLesson: ""
             }
 
         case FIND_LESSON:
             return {
                 course: state.course,
-                selectedLesson: "",
                 editingLesson: "",
                 lessons: state.lessons.filter(lesson => lesson._id === action.lessonId)
             }
@@ -62,7 +49,6 @@ const lessonReducer = (state = initialState, action) => {
         case UPDATE_LESSON:
             return {
                 course: state.course,
-                selectedLesson: state.selectedLesson,
                 editingLesson: "",
                 lessons: state.lessons
             }
@@ -70,7 +56,6 @@ const lessonReducer = (state = initialState, action) => {
         case FIND_COURSE_BY_ID:
             return {
                 course: action.course,
-                selectedLesson: state.selectedLesson,
                 editingLesson: state.editingLesson,
                 lessons: state.lessons
             }
@@ -79,14 +64,12 @@ const lessonReducer = (state = initialState, action) => {
             return {
                 course: state.course,
                 lessons: state.lessons,
-                editingLesson: action.editingLesson,
-                selectedLesson: action.editingLesson
+                editingLesson: action.editingLesson
             }
 
         case UPDATE_LESSON_FOR_MODULE:
             return {
                 course: state.course,
-                selectedLesson: state.selectedLesson,
                 editingLesson: state.editingLesson,
                 lessons: action.lessons
             }

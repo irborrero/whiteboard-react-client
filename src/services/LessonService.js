@@ -1,8 +1,7 @@
 import {API_URL} from "../constants";
 
-//TODO: ADD LESSON
+
 export const createLesson = (moduleId) => {
-    console.log(moduleId)
     return fetch(`${API_URL}/modules/${moduleId}/lessons`, {
         method: "POST",
         body: JSON.stringify({title: "Lesson"}),

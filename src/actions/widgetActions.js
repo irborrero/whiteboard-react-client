@@ -17,7 +17,7 @@ export const deleteWidget = (widgetId) => ({
 
 export const findWidgetForTopic = (actualWidgets) => ({
     type: FIND_ALL_WIDGETS_FOR_TOPIC,
-    widgets: actualWidgets,
+    actualWidgets: actualWidgets,
 })
 
 

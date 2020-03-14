@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {createModule, deleteModule, findModuleForCourse, editModule, updateModule, selectModule} from "../../actions/moduleActions";
+import {createModule, deleteModule, findModuleForCourse, editModule, updateModule} from "../../actions/moduleActions";
 import moduleService from '../../services/ModuleService'
 import {Link} from "react-router-dom";
 
@@ -20,8 +20,7 @@ class ModuleListComponent extends React.Component {
                                 this.props.moduleId !== module._id &&
                                 <li key={module._id} className="list-group-item wbdv-module-item">
                                     <Link className = "white-module" to={`/course/${this.props.courseId}/module/${module._id}`}>
-                                        <label className="wbdv-module-item-title"  onClick={() => this.props.selectModule(module._id)} >{module.title}</label>
-
+                                        <label className="wbdv-module-item-title">{module.title}</label>
                                         <button className="btn wbdv-row wbdv-button wbdv-edit white" onClick={() => this.props.editModule(module._id)}>
                                             <i className="fas fa-pencil-alt wbdv-row wbdv-button wbdv-edit"></i>
                                         </button>
@@ -99,9 +98,6 @@ const dispatchToPropertyMapper = (dispatch) => {
         editModule: (moduleId) =>
             dispatch(editModule(moduleId)),
 
-        selectModule: (moduleId) => {
-            dispatch(selectModule(moduleId))
-        },
         updateModule: (moduleId, module) => {
             if(document.getElementById("moduleTitle").value) {
                 module.title = document.getElementById("moduleTitle").value

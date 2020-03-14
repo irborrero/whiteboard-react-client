@@ -41,6 +41,7 @@ const CourseEditorComponent = ({history, courseId, moduleId, lessonId, topicId, 
                     <LessonTabsComponent
                         moduleId={moduleId}
                         courseId={courseId}
+                        lessonId={lessonId}
                     />
                 </ul>
             </div>
@@ -48,13 +49,15 @@ const CourseEditorComponent = ({history, courseId, moduleId, lessonId, topicId, 
         <div className="row custom-row">
 
             <ModuleListComponent
-                courseId={courseId}/>
+                courseId={courseId}
+                moduleId ={moduleId}/>
 
             <div className="col-8">
             <TopicPillsComponent
                 lessonId={lessonId}
                 moduleId={moduleId}
                 courseId={courseId}
+                topicId={topicId}
                 />
                 <div className="row">
                     <WidgetListComponent
