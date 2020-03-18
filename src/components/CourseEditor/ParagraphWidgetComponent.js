@@ -16,28 +16,15 @@ export default class ParagraphWidget extends React.Component {
                             <label className="heading-widget">Paragraph Widget</label>
                             <button className="btn arrow"
                                     onClick={() => {
-                                        let newOrder = this.state.widget.order +1
-                                        this.setState(prevState => ({
-                                            widget: {
-                                                ...prevState.widget,
-                                                order: newOrder
-                                            }
-                                        }))
-                                        this.props.updateWidget(this.state.widget)
+                                        this.state.widget.position = this.state.widget.position+1;
+                                        this.props.save(this.state.widget)
 
                                     }}><i className="fas fa-arrow-down"></i></button>
 
                             <button className="btn arrow"
                                     onClick={() => {
-                                        let newOrder = this.state.widget.order -1
-                                        this.setState(prevState => ({
-                                            widget: {
-                                                ...prevState.widget,
-                                                order: newOrder
-                                            }
-                                        }))
-                                        this.props.updateWidget(this.state.widget)
-
+                                        this.state.widget.position = this.state.widget.position-1;
+                                        this.props.save(this.state.widget)
                                     }}><i className="fas fa-arrow-up"></i></button>
                             <select
                                 onChange={(e) => {

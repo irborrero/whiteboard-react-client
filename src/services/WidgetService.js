@@ -4,6 +4,8 @@ export const createWidget = (tid, widget) => {
         body: JSON.stringify({
             name: "Widget" ,
             type: "HEADING",
+            style: "UNORDERED",
+            text: "New Widget Content",
             size: 1}),
         headers: {
             'content-type': 'application/json'

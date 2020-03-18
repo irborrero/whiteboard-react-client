@@ -443,3 +443,15 @@ form{
 .topic.red {
   background-color: #007CFF;
 }
+
+img{
+  width: 200px;
+}
+
+h4{
+  margin-top: 20px;
+}
+
+h3 {
+  margin-top: 20px;
+}

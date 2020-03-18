@@ -11,6 +11,18 @@ const initialState = {
     widgets: []
 }
 
+function compare(a, b) {
+    const orderA = a.position;
+    const orderB = b.position;
+
+    let comparison = 0;
+    if (orderA > orderB) {
+        comparison = 1;
+    } else if (orderA < orderB) {
+        comparison = -1;
+    }
+    return comparison;
+}
 
 
 const widgetReducer = (state = initialState, action) => {
@@ -28,7 +40,7 @@ const widgetReducer = (state = initialState, action) => {
             }
         case FIND_ALL_WIDGETS_FOR_TOPIC:
             return {
-                widgets: action.actualWidgets
+                widgets: action.actualWidgets.sort(compare)
             }
 
         case FIND_WIDGET:
